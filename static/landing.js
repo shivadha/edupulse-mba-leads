@@ -1,114 +1,144 @@
-// EduPulse India — Landing Page JS
+/* EduPulse — Landing page JS (vanilla, no dependencies) */
+'use strict';
 
-// ── Year button selector ──────────────────────────────────────────
-document.querySelectorAll('.year-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('target_year').value = btn.dataset.year;
-  });
-});
-
-// ── Live stats counter ────────────────────────────────────────────
-async function loadStats() {
+/* ── UTM capture → hidden field (POST /submit-lead contract) ── */
+(function captureUtm() {
   try {
-    const res = await fetch('/api/stats');
-    const data = await res.json();
-    animateCounter('stat-leads', data.total || 0);
-    const intel = await fetch('/api/intelligence?limit=1');
-    // Just show total rows via count
-    const leadsData = await fetch('/api/leads?limit=1');
-  } catch {}
+    const q = new URLSearchParams(window.location.search);
+    const utm = q.get('utm_source') || q.get('utm') || document.referrer || 'landing';
+    const el = document.getElementById('lf-utm');
+    if (el) el.value = utm.slice(0, 120);
+  } catch (e) { /* non-fatal */ }
+})();
+
+/* ── Animated counters ───────────────────────────────────── */
+function animateCount(el) {
+  const target = parseInt(el.dataset.count, 10) || 0;
+  const dur = 1400, t0 = performance.now();
+  function tick(t) {
+    const p = Math.min((t - t0) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased).toLocaleString('en-IN');
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 }
 
-function animateCounter(id, target) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  let start = 0;
-  const duration = 1500;
-  const step = target / (duration / 16);
-  const timer = setInterval(() => {
-    start += step;
-    if (start >= target) { start = target; clearInterval(timer); }
-    el.textContent = Math.floor(start).toLocaleString('en-IN');
-  }, 16);
-}
-
-// Set sample intel count (will update when scraped data comes in)
-function setIntelCount() {
+/* Fetch a real signal count for the stats strip, when available */
+function hydrateLiveCount() {
   fetch('/api/intelligence?limit=500')
-    .then(r => r.json())
-    .then(d => animateCounter('stat-intel', d.length))
+    .then(r => (r.ok ? r.json() : Promise.reject()))
+    .then(items => {
+      const el = document.querySelector('.hero-stats [data-count="13"]');
+      if (el && items.length) {
+        el.dataset.count = String(Math.min(items.length, 999));
+        animateCount(el);
+      }
+    })
     .catch(() => {});
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  loadStats();
-  setIntelCount();
-});
-
-// ── Form submission (AJAX) ────────────────────────────────────────
-const form = document.getElementById('leadForm');
-const btn = document.getElementById('submitBtn');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const btnText = btn.querySelector('.btn-text');
-  const btnLoader = btn.querySelector('.btn-loader');
-  btn.disabled = true;
-  btnText.hidden = true;
-  btnLoader.hidden = false;
-
-  const formData = new FormData(form);
-
-  try {
-    const res = await fetch('/submit-lead', {
-      method: 'POST',
-      body: formData,
-      headers: { 'X-Requested-With': 'XMLHttpRequest' },
-    });
-    const data = await res.json();
-
-    if (data.ok) {
-      showToast('🎉 Registered successfully! We\'ll contact you soon.');
-      form.reset();
-      // Reset year buttons
-      document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector('.year-btn[data-year="2025"]').classList.add('active');
-      document.getElementById('target_year').value = '2025';
-      // Animate the lead counter up by 1
-      const el = document.getElementById('stat-leads');
-      if (el) {
-        const current = parseInt(el.textContent.replace(/,/g, '')) || 0;
-        animateCounter('stat-leads', current + 1);
-      }
-    } else {
-      showToast('⚠️ ' + (data.error || 'Something went wrong. Please try again.'), 'error');
-    }
-  } catch (err) {
-    showToast('⚠️ Network error. Please try again.', 'error');
-  }
-
-  btn.disabled = false;
-  btnText.hidden = false;
-  btnLoader.hidden = true;
-});
-
-// ── Toast ─────────────────────────────────────────────────────────
-function showToast(msg, type = 'success') {
-  const toast = document.getElementById('toast');
-  const msgEl = document.getElementById('toastMsg');
-  const iconEl = toast.querySelector('.toast-icon');
-  msgEl.textContent = msg;
-  if (type === 'error') {
-    toast.style.background = '#2f1a1a';
-    toast.style.borderColor = '#5a2d2d';
-    iconEl.textContent = '⚠️';
-  } else {
-    toast.style.background = '#1a2f1a';
-    toast.style.borderColor = '#2d5a2d';
-    iconEl.textContent = '✅';
-  }
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 4000);
+/* ── College marquee ─────────────────────────────────────── */
+function buildMarquee() {
+  const track = document.getElementById('collegeTrack');
+  if (!track) return;
+  const colleges = [
+    'IIM Ahmedabad', 'IIM Bangalore', 'IIM Calcutta', 'XLRI Jamshedpur',
+    'FMS Delhi', 'SPJIMR Mumbai', 'MDI Gurgaon', 'IIFT Delhi',
+    'IIM Lucknow', 'IIM Kozhikode', 'NMIMS Mumbai', 'SIBM Pune',
+    'JBIMS Mumbai', 'TISS Mumbai', 'IIM Indore', 'IIM Shillong',
+  ];
+  const seq = colleges.map(c => '<span>' + c + '</span>').join('');
+  track.innerHTML = seq + seq; // duplicate for seamless loop
 }
+
+/* ── FAQ accordion ───────────────────────────────────────── */
+function toggleFaq(btn) {
+  const item = btn.closest('.faq');
+  const answer = item.querySelector('.faq-a');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq.open').forEach(f => {
+    f.classList.remove('open');
+    f.querySelector('.faq-a').style.maxHeight = null;
+  });
+  if (!wasOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+/* ── Lead form ───────────────────────────────────────────── */
+function setFormError(msg) {
+  const box = document.getElementById('formError');
+  if (!box) return;
+  box.textContent = msg || '';
+  box.classList.toggle('show', !!msg);
+}
+
+function validPhone(p) {
+  return /^[6-9]\d{9}$/.test(p.replace(/\s+/g, ''));
+}
+
+function submitCounsellingForm(event) {
+  event.preventDefault();
+  setFormError('');
+
+  const name = document.getElementById('lf-name').value.trim();
+  const phone = document.getElementById('lf-phone').value.trim();
+  const city = document.getElementById('lf-city').value.trim();
+  const email = document.getElementById('lf-email').value.trim();
+
+  if (name.length < 2) { setFormError('Please enter your full name.'); return false; }
+  if (!validPhone(phone)) { setFormError('Please enter a valid 10-digit mobile number.'); return false; }
+  if (city.length < 2) { setFormError('Please enter your city.'); return false; }
+
+  const btn = document.getElementById('fSubmit');
+  const original = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Submitting…';
+
+  const payload = new URLSearchParams();
+  payload.set('name', name);
+  payload.set('phone', phone);
+  payload.set('email', email);
+  payload.set('city', city);
+  payload.set('target_exam', document.getElementById('lf-exam').value);
+  payload.set('target_year', document.getElementById('lf-year').value);
+  payload.set('utm_source', document.getElementById('lf-utm').value || 'landing');
+
+  fetch('/submit-lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: payload.toString(),
+  })
+    .then(res => {
+      if (!res.ok) throw new Error('Server returned ' + res.status);
+      window.location.href = '/thank-you?name=' + encodeURIComponent(name.split(' ')[0]);
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.innerHTML = original;
+      setFormError('Something went wrong. Please try again, or refresh the page.');
+      console.error('Lead submit failed:', err);
+    });
+  return false;
+}
+
+/* ── Sticky CTA visibility ───────────────────────────────── */
+function watchStickyCta() {
+  const cta = document.getElementById('stickyCta');
+  const form = document.getElementById('lead-form');
+  if (!cta || !form || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => cta.classList.toggle('show', !e.isIntersecting && e.boundingClientRect.top > 0));
+  }, { threshold: 0 });
+  io.observe(form);
+}
+
+/* ── Boot ────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  buildMarquee();
+  watchStickyCta();
+  document.querySelectorAll('.hero-stats .num[data-count]').forEach(animateCount);
+  hydrateLiveCount();
+});

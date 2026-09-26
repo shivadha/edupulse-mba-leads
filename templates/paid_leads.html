@@ -3,18 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paid Lead Sources — EduPulse India</title>
+  <title>Paid Lead Sources — EduPulse</title>
   <meta name="description" content="Authentic paid lead generation platforms for MBA aspirants in India — with real pricing, pros/cons, and ROI comparison." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #090A12; --bg-card: #0F1120; --bg-glass: rgba(255,255,255,0.04);
-      --border: rgba(255,255,255,0.08); --text: #F0F0FF; --muted: #8888BB;
-      --purple: #7C3AED; --cyan: #06B6D4; --gold: #F59E0B; --green: #22C55E;
-      --red: #EF4444; --orange: #F97316;
+      --bg: #0a0f1e; --bg-card: rgba(15, 21, 40, 0.9); --bg-glass: rgba(148,163,184,0.055);
+      --border: rgba(148,163,184,0.14); --text: #eef2ff; --muted: #8b95b3;
+      --purple: #6c7bff; --cyan: #22d3ee; --gold: #fbbf24; --green: #34d399;
+      --red: #fb7185; --orange: #fb923c;
     }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     .topnav {
       background: var(--bg-card); border-bottom: 1px solid var(--border);
       padding: 16px 40px; display: flex; align-items: center; justify-content: space-between;
@@ -30,7 +29,7 @@
     .nav-links a:hover, .nav-links a.active { color: var(--text); }
     .hero {
       text-align: center; padding: 80px 20px 60px;
-      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124,58,237,0.15), transparent);
+      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(108,123,255,0.16), transparent);
     }
     .hero-tag {
       display: inline-block;
@@ -39,7 +38,7 @@
       font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
       margin-bottom: 20px;
     }
-    h1 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 16px; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 850; letter-spacing: -0.025em; margin-bottom: 16px; }
     .gradient { background: linear-gradient(135deg, var(--purple), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .hero-desc { color: var(--muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; }
     .disclaimer {
@@ -56,10 +55,10 @@
     .filter-btn {
       background: var(--bg-glass); border: 1px solid var(--border);
       border-radius: 100px; color: var(--muted);
-      font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600;
+      font-size: 0.82rem; font-weight: 600;
       padding: 8px 18px; cursor: pointer; transition: all 0.2s;
     }
-    .filter-btn.active { background: rgba(124,58,237,0.2); border-color: var(--purple); color: #C4B5FD; }
+    .filter-btn.active { background: rgba(108,123,255,0.18); border-color: var(--purple); color: #aeb8ff; }
     .filter-btn:hover:not(.active) { border-color: rgba(255,255,255,0.2); color: var(--text); }
     /* GRID */
     .leads-grid {
@@ -73,7 +72,7 @@
       border-radius: 20px; overflow: hidden; transition: all 0.3s;
       display: flex; flex-direction: column;
     }
-    .lead-card:hover { transform: translateY(-5px); border-color: rgba(124,58,237,0.4); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+    .lead-card:hover { transform: translateY(-5px); border-color: rgba(108,123,255,0.45); box-shadow: 0 18px 44px rgba(0,0,0,0.45); }
     .card-top {
       padding: 24px 24px 0;
       display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
@@ -92,7 +91,7 @@
     .badge.verified { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
     .badge.india { background: rgba(245,158,11,0.12); color: var(--gold); border: 1px solid rgba(245,158,11,0.3); }
     .badge.api { background: rgba(6,182,212,0.12); color: var(--cyan); border: 1px solid rgba(6,182,212,0.3); }
-    .badge.premium { background: rgba(124,58,237,0.15); color: #C4B5FD; border: 1px solid rgba(124,58,237,0.3); }
+    .badge.premium { background: rgba(108,123,255,0.14); color: #aeb8ff; border: 1px solid rgba(108,123,255,0.32); }
     .badge.crm { background: rgba(249,115,22,0.12); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
     .card-body { padding: 20px 24px; flex: 1; }
     .card-name { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
@@ -131,9 +130,9 @@
     }
     .btn-visit {
       flex: 1;
-      background: linear-gradient(135deg, var(--purple), #4F46E5);
+      background: linear-gradient(135deg, #6c7bff, #4f5df5);
       border: none; border-radius: 10px; color: white;
-      font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700;
+      font-size: 0.85rem; font-weight: 700;
       padding: 10px; cursor: pointer; text-align: center; text-decoration: none;
       display: block; transition: transform 0.2s;
     }
@@ -141,7 +140,7 @@
     .btn-info {
       background: rgba(255,255,255,0.05); border: 1px solid var(--border);
       border-radius: 10px; color: var(--muted);
-      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;
+      font-size: 0.78rem; font-weight: 600;
       padding: 10px 14px; cursor: pointer;
     }
     /* ROI SECTION */
@@ -778,7 +777,7 @@
 </div>
 
 <footer>
-  <p>EduPulse India — Paid Lead Sources Guide &nbsp;|&nbsp; Prices are indicative 2024–25 rates. Contact vendors for exact quotes.</p>
+  <p>EduPulse — Paid Lead Sources Guide &nbsp;|&nbsp; Prices are indicative 2024–25 rates. Contact vendors for exact quotes.</p>
   <p style="margin-top:6px">⚠️ Always verify PDPA & TRAI DND compliance before purchasing or using any lead database.</p>
 </footer>
 

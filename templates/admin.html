@@ -3,297 +3,308 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EduPulse India — MBA Lead Intelligence & Admissions CRM</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+  <title>EduPulse — Admissions Intelligence Console</title>
+  <meta name="description" content="EduPulse internal console: live MBA aspirant intelligence, lead conversion and scraper health." />
   <link rel="stylesheet" href="/static/admin.css" />
-  <style>
-    /* Additional CRM & Pitch Modal Styles */
-    .pitch-modal-overlay {
-      position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 9999; backdrop-filter: blur(4px);
-    }
-    .pitch-modal {
-      background: #FFFFFF; border-radius: 16px; width: 92%; max-width: 650px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.15); border: 1px solid #E2E8F0;
-      overflow: hidden; animation: popIn 0.2s ease-out;
-    }
-    @keyframes popIn { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .pm-header {
-      padding: 18px 24px; background: linear-gradient(135deg, #6C3EF4, #4F46E5);
-      color: white; display: flex; justify-content: space-between; align-items: center;
-    }
-    .pm-body { padding: 24px; max-height: 75vh; overflow-y: auto; }
-    .pm-script-box {
-      background: #F8FAFC; border-left: 4px solid #6C3EF4; padding: 14px 18px;
-      border-radius: 0 8px 8px 0; margin-bottom: 16px; font-size: 0.92rem; line-height: 1.6;
-    }
-    .btn-action-small {
-      padding: 6px 12px; font-size: 0.78rem; font-weight: 600; border-radius: 6px;
-      cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 4px;
-      transition: all 0.15s ease;
-    }
-    .btn-pitch { background: #EEF2FF; color: #4F46E5; }
-    .btn-pitch:hover { background: #E0E7FF; }
-    .btn-convert { background: #ECFDF5; color: #059669; }
-    .btn-convert:hover { background: #D1FAE5; }
-    .search-input-box {
-      padding: 8px 14px; border: 1px solid #E2E8F0; border-radius: 8px;
-      font-size: 0.85rem; width: 240px; outline: none; background: #FFFFFF;
-    }
-    .search-input-box:focus { border-color: #6C3EF4; box-shadow: 0 0 0 3px rgba(108,62,244,0.1); }
-  </style>
 </head>
 <body>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <span style="font-size:1.8rem">🎓</span>
+  <div class="nav-scrim" onclick="document.body.classList.remove('nav-open')"></div>
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar" aria-label="Primary navigation">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 10v6"/></svg>
+      </div>
       <div>
-        <div class="s-brand" style="font-weight:800;font-size:1.15rem;color:#1E293B">EduPulse CRM</div>
-        <div class="s-sub" style="font-size:0.75rem;color:#64748B">Admissions Intelligence</div>
+        <div class="brand-name">Edu<em>Pulse</em></div>
+        <div class="brand-sub">Admissions Intel</div>
       </div>
     </div>
 
-    <nav class="sidebar-nav">
-      <button class="nav-item active" onclick="showTab('overview')" id="tab-btn-overview">
-        <span>📊</span> Dashboard
+    <nav class="nav">
+      <div class="nav-label">Workspace</div>
+      <button class="nav-item active" id="tab-btn-overview" onclick="showTab('overview')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Overview
       </button>
-      <button class="nav-item" onclick="showTab('intelligence')" id="tab-btn-intelligence">
-        <span>🧠</span> Live Aspirants Feed
+      <button class="nav-item" id="tab-btn-intelligence" onclick="showTab('intelligence')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        Live Feed
+        <span class="nav-badge" id="navIntelCount">–</span>
       </button>
-      <button class="nav-item" onclick="showTab('leads')" id="tab-btn-leads">
-        <span>👥</span> Converted Leads
+      <button class="nav-item" id="tab-btn-leads" onclick="showTab('leads')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Call Queue
+        <span class="nav-badge" id="navLeadCount">–</span>
       </button>
-      <button class="nav-item" onclick="showTab('scraper')" id="tab-btn-scraper">
-        <span>🔄</span> Scraper Engines (12)
+      <button class="nav-item" id="tab-btn-scraper" onclick="showTab('scraper')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+        Sources
       </button>
-      <a class="nav-item" href="/paid-leads" target="_blank" style="text-decoration:none">
-        <span>💰</span> Paid Lead Sources
+
+      <div class="nav-label">Resources</div>
+      <a class="nav-item" href="/paid-leads" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2a2.4 2.4 0 0 0-3.5-1.1c-.9.6-1.1 1.7-.4 2.6.6.8 2.1 1.2 2.8 1.9.7.8.5 1.9-.4 2.5a2.4 2.4 0 0 1-3.5-1.1"/><path d="M12 6.5v11"/></svg>
+        Paid Lead Sources
+      </a>
+      <a class="nav-item" href="/landing" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Landing Page
       </a>
     </nav>
 
-    <div class="sidebar-footer">
-      <div class="scraper-status" id="scraperStatus">
-        <span class="pulse-dot"></span>
-        <span id="scraperLabel">Background Sync Active</span>
+    <div class="sidebar-foot">
+      <div class="engine-card">
+        <div class="engine-row"><span class="dot" id="engineDot"></span><span id="engineLabel">Engine starting…</span></div>
+        <div class="engine-sub" id="engineSub">Connecting to scheduler</div>
       </div>
-      <div class="last-update" id="lastUpdate">Syncing every 5m...</div>
     </div>
   </aside>
 
-  <!-- MAIN CONTENT -->
+  <!-- ══ MAIN ══ -->
   <main class="main">
-
-    <!-- TOP BAR -->
     <header class="topbar">
-      <div class="topbar-left">
-        <h1 id="pageTitle" style="font-size:1.4rem;font-weight:700">Internal Lead & Admissions Intelligence</h1>
-        <span class="topbar-tag" id="liveTag">🟢 Live Engine</span>
-      </div>
-      <div class="topbar-right" style="display:flex;align-items:center;gap:10px">
-        <input type="text" id="globalSearch" class="search-input-box" placeholder="🔍 Search query, exam, college..." oninput="handleSearch(this.value)" />
-        <button class="btn-scrape" onclick="triggerScrape()" id="scrapeBtn">
-          <span id="scrapeIcon">⚡</span> Scrape Now
+      <button class="nav-toggle" onclick="document.body.classList.toggle('nav-open')" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <h1 class="topbar-title" id="pageTitle">Overview</h1>
+      <span class="live-pill"><span class="dot" style="width:7px;height:7px"></span>Live</span>
+      <div class="topbar-spacer"></div>
+      <div class="topbar-actions">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" id="globalSearch" class="search-input" placeholder="Search signals, exams, colleges…" oninput="handleSearch(this.value)" autocomplete="off" />
+        </div>
+        <button class="btn btn-ghost" onclick="triggerScrape()" id="scrapeBtn" title="Trigger an immediate background scrape">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          <span class="btn-label">Scrape now</span>
         </button>
-        <button class="btn-scrape" style="background:#2563EB" onclick="exportIntelligenceCSV()">
-          <span>📥</span> Export CSV
+        <button class="btn btn-primary" onclick="exportIntelligenceCSV()" title="Download scraped intelligence as CSV">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
+          <span class="btn-label">Export CSV</span>
         </button>
       </div>
     </header>
 
-    <!-- ─── OVERVIEW TAB ─── -->
-    <section class="tab-section" id="tab-overview">
+    <div class="content">
 
-      <!-- STATS CARDS -->
-      <div class="stats-grid">
-        <div class="stat-card purple">
-          <div class="sc-icon">🧠</div>
-          <div class="sc-num" id="sc-intel">—</div>
-          <div class="sc-label">Live Scraped Aspirants</div>
-          <div class="sc-delta" id="sc-intel-delta">Updated every 5m in background</div>
-        </div>
-        <div class="stat-card cyan">
-          <div class="sc-icon">📚</div>
-          <div class="sc-num" id="sc-top-exam">—</div>
-          <div class="sc-label">Top Target Exam</div>
-          <div class="sc-delta" id="sc-exam-count">— aspirants</div>
-        </div>
-        <div class="stat-card gold">
-          <div class="sc-icon">🏛️</div>
-          <div class="sc-num" id="sc-sources-count">12 Sources</div>
-          <div class="sc-label">Active Scraping Hubs</div>
-          <div class="sc-delta">Reddit, Shiksha, Careers360, etc.</div>
-        </div>
-        <div class="stat-card green">
-          <div class="sc-icon">👥</div>
-          <div class="sc-num" id="sc-total">0</div>
-          <div class="sc-label">Admissions Call Queue</div>
-          <div class="sc-delta" id="sc-today">+0 converted today</div>
-        </div>
-      </div>
-
-      <!-- CHARTS ROW -->
-      <div class="charts-row">
-        <div class="chart-card">
-          <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:12px">Aspirant Volume by Exam</h3>
-          <div class="bar-chart" id="examChart"></div>
-        </div>
-        <div class="chart-card">
-          <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:12px">Distribution by Data Source</h3>
-          <div class="bar-chart" id="cityChart"></div>
-        </div>
-      </div>
-
-      <!-- LIVE STREAM PREVIEW ON DASHBOARD -->
-      <div class="table-card">
-        <div class="table-header" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #E2E8F0">
-          <div>
-            <h3 style="font-size:1.05rem;font-weight:700;color:#0F172A">Live MBA Aspirant Inquiries & Intent Stream</h3>
-            <p style="font-size:0.8rem;color:#64748B;margin-top:2px">Real-time candidate queries ready for admissions pitch & phone counseling</p>
+      <!-- ══ OVERVIEW ══ -->
+      <section class="tab-section" id="tab-overview">
+        <div class="stats-grid">
+          <div class="stat-card" style="--accent:#6c7bff;--accent-soft:rgba(108,123,255,0.13)">
+            <div class="stat-top">
+              <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+              <span class="stat-delta" id="sc-intel-delta">—</span>
+            </div>
+            <div class="stat-num num" id="sc-intel">—</div>
+            <div class="stat-label">Signals collected</div>
           </div>
-          <button class="btn-link" onclick="showTab('intelligence')" style="font-size:0.85rem;font-weight:600;color:#6C3EF4;background:none;border:none;cursor:pointer">
-            View All Aspirants →
+          <div class="stat-card" style="--accent:#22d3ee;--accent-soft:rgba(34,211,238,0.12)">
+            <div class="stat-top">
+              <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+              <span class="stat-delta" id="sc-exam-delta" style="background:rgba(34,211,238,0.12);color:#22d3ee">—</span>
+            </div>
+            <div class="stat-num" id="sc-top-exam">—</div>
+            <div class="stat-label" id="sc-exam-count">Top target exam</div>
+          </div>
+          <div class="stat-card" style="--accent:#fbbf24;--accent-soft:rgba(251,191,36,0.12)">
+            <div class="stat-top">
+              <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/><path d="M3.5 9h17M3.5 15h17"/></svg></div>
+              <span class="stat-delta warn" id="sc-src-delta">13 engines</span>
+            </div>
+            <div class="stat-num num" id="sc-sources-count">—</div>
+            <div class="stat-label">Active scrape sources</div>
+          </div>
+          <div class="stat-card" style="--accent:#34d399;--accent-soft:rgba(52,211,153,0.12)">
+            <div class="stat-top">
+              <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <span class="stat-delta" id="sc-today">—</span>
+            </div>
+            <div class="stat-num num" id="sc-total">—</div>
+            <div class="stat-label">Leads in call queue</div>
+          </div>
+        </div>
+
+        <div class="section-head" style="margin-top:22px">
+          <div>
+            <h2>Signal distribution</h2>
+            <p>Where aspirant activity is coming from, right now</p>
+          </div>
+        </div>
+        <div class="panels-2">
+          <div class="panel">
+            <h3>Volume by exam</h3>
+            <div class="panel-sub">Scraped inquiries grouped by target exam</div>
+            <div id="examChart"></div>
+          </div>
+          <div class="panel">
+            <h3>Volume by source</h3>
+            <div class="panel-sub">Which engines are producing the most signals</div>
+            <div id="sourceChart"></div>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <div>
+            <h2>Fresh signals</h2>
+            <p>The latest aspirant inquiries across all engines</p>
+          </div>
+          <button class="link-btn" onclick="showTab('intelligence')">Open live feed
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
           </button>
         </div>
-        <div class="intel-grid" id="overviewIntelGrid" style="padding:16px"></div>
-      </div>
-    </section>
+        <div class="intel-grid" id="overviewIntelGrid"></div>
+      </section>
 
-    <!-- ─── INTELLIGENCE TAB ─── -->
-    <section class="tab-section hidden" id="tab-intelligence">
-      <div class="filter-row" style="background:#FFFFFF;padding:14px 20px;border-radius:12px;border:1px solid #E2E8F0;display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap">
-        <select id="sourceFilter" onchange="loadIntelligence()" style="padding:8px 12px;border-radius:8px;border:1px solid #CBD5E1;font-size:0.85rem">
-          <option value="all">🌐 All Sources</option>
-          <option value="reddit">🔴 Reddit (CAT/MBA)</option>
-          <option value="shiksha">🎓 Shiksha.com</option>
-          <option value="careers360">🚀 Careers360</option>
-          <option value="mba_universe">🌐 MBA Universe</option>
-          <option value="pagalguy">💬 Pagalguy</option>
-          <option value="college_portal">🏛️ College Portals</option>
-          <option value="quora">❓ Quora Q&A</option>
-          <option value="google_news">📰 Google News India</option>
-          <option value="youtube">▶️ YouTube Admissions</option>
-          <option value="telegram">✈️ Telegram MBA Groups</option>
-          <option value="india_news">🗞️ Education News</option>
-        </select>
-        <select id="intelExamFilter" onchange="loadIntelligence()" style="padding:8px 12px;border-radius:8px;border:1px solid #CBD5E1;font-size:0.85rem">
-          <option value="all">📚 All Target Exams</option>
-          <option value="CAT">CAT 2025/2026</option>
-          <option value="XAT">XAT (XLRI & Top Tier)</option>
-          <option value="GMAT">GMAT (ISB & Executive)</option>
-          <option value="CMAT">CMAT</option>
-          <option value="NMAT">NMAT (NMIMS)</option>
-          <option value="SNAP">SNAP (Symbiosis)</option>
-          <option value="MAT">MAT</option>
-        </select>
-        <button class="btn-export" onclick="exportIntelligenceCSV()" style="margin-left:auto;background:#059669;color:white;padding:8px 16px;border:none;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:pointer">
-          📥 Download Leads (CSV)
+      <!-- ══ LIVE FEED ══ -->
+      <section class="tab-section hidden" id="tab-intelligence">
+        <div class="filter-bar">
+          <select id="sourceFilter" class="select" onchange="loadIntelligence()" aria-label="Filter by source">
+            <option value="all">All sources</option>
+          </select>
+          <select id="intelExamFilter" class="select" onchange="loadIntelligence()" aria-label="Filter by exam">
+            <option value="all">All exams</option>
+            <option value="CAT">CAT</option>
+            <option value="XAT">XAT</option>
+            <option value="GMAT">GMAT</option>
+            <option value="CMAT">CMAT</option>
+            <option value="NMAT">NMAT</option>
+            <option value="SNAP">SNAP</option>
+            <option value="MAT">MAT</option>
+            <option value="GRE">GRE</option>
+            <option value="IIFT">IIFT</option>
+          </select>
+          <div class="seg" role="group" aria-label="Filter by intent">
+            <button class="on" data-intent="all" onclick="setIntentFilter('all', this)">All intent</button>
+            <button data-intent="high" onclick="setIntentFilter('high', this)"><span class="seg-dot" style="background:#fb7185"></span>High</button>
+            <button data-intent="medium" onclick="setIntentFilter('medium', this)"><span class="seg-dot" style="background:#fbbf24"></span>Med</button>
+            <button data-intent="low" onclick="setIntentFilter('low', this)"><span class="seg-dot" style="background:#22d3ee"></span>Low</button>
+          </div>
+          <span class="filter-count" id="intelCountBadge">Loading…</span>
+        </div>
+        <div class="intel-grid" id="intelGrid"></div>
+      </section>
+
+      <!-- ══ CALL QUEUE ══ -->
+      <section class="tab-section hidden" id="tab-leads">
+        <div class="filter-bar">
+          <select id="examFilter" class="select" onchange="loadLeads()" aria-label="Filter leads by exam">
+            <option value="all">All exams</option>
+            <option value="CAT">CAT</option>
+            <option value="XAT">XAT</option>
+            <option value="GMAT">GMAT</option>
+            <option value="CMAT">CMAT</option>
+            <option value="SNAP">SNAP</option>
+            <option value="NMAT">NMAT</option>
+          </select>
+          <button class="btn btn-ghost" onclick="exportCRMLeads()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
+            Export queue
+          </button>
+          <span class="filter-count" id="leadsCount">—</span>
+        </div>
+        <div class="table-card">
+          <div class="table-scroll" id="leadsTableBody"></div>
+        </div>
+      </section>
+
+      <!-- ══ SOURCES ══ -->
+      <section class="tab-section hidden" id="tab-scraper">
+        <div class="section-head">
+          <div>
+            <h2>Engine health</h2>
+            <p>Background scraper status and per-source output</p>
+          </div>
+        </div>
+        <div class="health-grid">
+          <div class="health-card">
+            <div class="hc-label">Scheduler</div>
+            <div class="hc-val" id="ss-status">—</div>
+            <div class="hc-sub" id="ss-last-run">—</div>
+          </div>
+          <div class="health-card">
+            <div class="hc-label">Signals in database</div>
+            <div class="hc-val num" id="ss-total">—</div>
+            <div class="hc-sub" id="ss-added">—</div>
+          </div>
+          <div class="health-card">
+            <div class="hc-label">Refresh cadence</div>
+            <div class="hc-val">Every 5 min</div>
+            <div class="hc-sub">Automatic background sweep, deduplicated</div>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <div>
+            <h2>Scrape engines</h2>
+            <p id="sourceCount">Loading…</p>
+          </div>
+        </div>
+        <div class="sources-grid" id="sourcesList"></div>
+
+        <button class="btn btn-primary big-scrape" onclick="triggerScrape()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          Run immediate background scrape
         </button>
-        <span class="filter-count" id="intelCountBadge" style="font-size:0.85rem;font-weight:600;color:#64748B">Loading data...</span>
-      </div>
-      <div class="intel-grid" id="intelGrid">
-        <div class="loading-state">Loading live intelligence data...</div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ─── LEADS (CRM CALL QUEUE) TAB ─── -->
-    <section class="tab-section hidden" id="tab-leads">
-      <div class="filter-row" style="background:#FFFFFF;padding:14px 20px;border-radius:12px;border:1px solid #E2E8F0;display:flex;gap:12px;align-items:center;margin-bottom:16px">
-        <select id="examFilter" onchange="loadLeads()" style="padding:8px 12px;border-radius:8px;border:1px solid #CBD5E1;font-size:0.85rem">
-          <option value="all">All Exams</option>
-          <option value="CAT">CAT</option>
-          <option value="XAT">XAT</option>
-          <option value="GMAT">GMAT</option>
-          <option value="CMAT">CMAT</option>
-          <option value="SNAP">SNAP</option>
-          <option value="NMAT">NMAT</option>
-        </select>
-        <button class="btn-export" onclick="exportCRMLeads()" style="background:#2563EB;color:white;padding:8px 16px;border:none;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:pointer">
-          📥 Export CRM Leads
-        </button>
-        <span class="filter-count" id="leadsCount" style="margin-left:auto;font-size:0.85rem;font-weight:600;color:#64748B">— leads</span>
-      </div>
-      <div class="table-card">
-        <div id="leadsTableBody"></div>
-      </div>
-    </section>
-
-    <!-- ─── SCRAPER TAB ─── -->
-    <section class="tab-section hidden" id="tab-scraper">
-      <div class="scraper-panel">
-        <div class="scraper-header">
-          <h3 style="font-weight:700">🔄 Background Scraper Engines & Health</h3>
-          <div class="status-badge" id="schedulerBadge">Checking...</div>
-        </div>
-        <div class="scraper-stats-row">
-          <div class="ss-card">
-            <div class="ss-label">Last Run</div>
-            <div class="ss-val" id="ss-last-run">—</div>
-          </div>
-          <div class="ss-card">
-            <div class="ss-label">Items In DB</div>
-            <div class="ss-val" id="ss-last-added">—</div>
-          </div>
-          <div class="ss-card">
-            <div class="ss-label">Auto-Refresh Interval</div>
-            <div class="ss-val" id="ss-next-run">Every 5 min</div>
-          </div>
-        </div>
-
-        <div class="sources-status">
-          <h4>Active Live Sources — <span id="sourceCount">Loading...</span></h4>
-          <div class="sources-list" id="sourcesList">
-            <div style="color:#64748B;font-size:0.85rem;padding:10px">Loading sources...</div>
-          </div>
-        </div>
-
-        <div class="scrape-log" id="scrapeLog">
-          <h4>Live Extraction Log</h4>
-          <div class="log-area" id="logArea">Waiting for scrape data...</div>
-        </div>
-
-        <button class="btn-big-scrape" onclick="triggerScrape()">
-          ⚡ Run Immediate Background Scrape
-        </button>
-      </div>
-    </section>
-
+    </div>
   </main>
 
-  <!-- PITCH SCRIPT MODAL -->
-  <div id="pitchModal" class="pitch-modal-overlay" style="display:none" onclick="if(event.target===this)closePitchModal()">
-    <div class="pitch-modal">
-      <div class="pm-header">
+  <!-- ══ PITCH MODAL ══ -->
+  <div id="pitchModal" class="modal-overlay hidden" onclick="if(event.target===this)closePitchModal()" role="dialog" aria-modal="true" aria-label="Pitch script">
+    <div class="modal">
+      <div class="modal-head">
         <div>
-          <h3 style="font-size:1.1rem;font-weight:700" id="pmAspirantTitle">Admissions Telecaller Pitch</h3>
-          <span style="font-size:0.8rem;opacity:0.9" id="pmExamTag">Exam: CAT 2025</span>
+          <h3 id="pmTitle">Call pitch script</h3>
+          <div class="m-sub" id="pmExamTag"></div>
         </div>
-        <button onclick="closePitchModal()" style="background:none;border:none;color:white;font-size:1.4rem;cursor:pointer">✕</button>
+        <button class="modal-x" onclick="closePitchModal()" aria-label="Close">✕</button>
       </div>
-      <div class="pm-body">
-        <div style="margin-bottom:14px">
-          <strong style="font-size:0.85rem;color:#475569">ASPIRANT QUERY / CONTEXT:</strong>
-          <p id="pmQueryText" style="font-size:0.9rem;color:#1E293B;margin-top:4px;background:#F1F5F9;padding:10px;border-radius:6px"></p>
-        </div>
-
-        <div style="margin-bottom:16px">
-          <strong style="font-size:0.85rem;color:#4F46E5">TELEPHONE COUNSELOR SCRIPT:</strong>
-          <div class="pm-script-box" id="pmGeneratedScript"></div>
-        </div>
-
-        <div style="display:flex;gap:10px;justify-content:flex-end">
-          <button class="btn-action-small btn-convert" style="padding:10px 18px;font-size:0.85rem" onclick="convertCurrentToLead()">
-            ➕ Add to CRM Call Queue
-          </button>
-          <button class="btn-action-small" style="background:#64748B;color:white;padding:10px 18px;font-size:0.85rem" onclick="closePitchModal()">
-            Close
-          </button>
-        </div>
+      <div class="modal-body">
+        <div class="query-box"><strong>Aspirant signal</strong><span id="pmQueryText"></span></div>
+        <div class="query-box" style="margin-top:-6px"><strong>Counselor script</strong></div>
+        <div class="script-box" id="pmGeneratedScript" style="margin-top:-10px"></div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="copyPitchScript()">Copy script</button>
+        <button class="btn btn-primary" onclick="convertCurrentToLead()">Add to call queue</button>
       </div>
     </div>
   </div>
+
+  <!-- ══ CONVERT MODAL ══ -->
+  <div id="convertModal" class="modal-overlay hidden" onclick="if(event.target===this)closeConvertModal()" role="dialog" aria-modal="true" aria-label="Convert to lead">
+    <div class="modal" style="max-width:480px">
+      <div class="modal-head">
+        <div>
+          <h3>Add to call queue</h3>
+          <div class="m-sub" id="cmSub"></div>
+        </div>
+        <button class="modal-x" onclick="closeConvertModal()" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="field">
+          <label for="cmName">Candidate name</label>
+          <input id="cmName" type="text" placeholder="e.g. Aspirant from Reddit" autocomplete="off" />
+          <div class="hint">Leave blank to use a generated label.</div>
+        </div>
+        <div class="field">
+          <label for="cmPhone">Phone number</label>
+          <input id="cmPhone" type="tel" placeholder="10-digit mobile (optional for now)" autocomplete="off" />
+          <div class="hint">Add the number once the counselor has it — the queue tracks follow-ups.</div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="closeConvertModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="submitConvert()">Add lead</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
 
   <script src="/static/admin.js"></script>
 </body>

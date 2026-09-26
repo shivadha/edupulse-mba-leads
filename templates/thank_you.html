@@ -2,80 +2,99 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Thank You — EduPulse India</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You — EduPulse</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Inter', sans-serif;
-      background: #090A12;
-      color: #E8E8FF;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(900px 420px at 50% -10%, rgba(108, 123, 255, 0.16), transparent 60%), #0a0f1e;
+      color: #eef2ff; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px; -webkit-font-smoothing: antialiased;
     }
     .card {
-      background: #0F1120;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 28px;
-      padding: 60px 48px;
-      text-align: center;
-      max-width: 520px;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 60px rgba(124,58,237,0.2);
+      background: rgba(15, 21, 40, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 24px; padding: 52px 44px; text-align: center;
+      max-width: 540px; width: 100%;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.45), 0 0 60px rgba(108,123,255,0.12);
       animation: fadeUp 0.6s ease forwards;
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+    .check {
+      width: 76px; height: 76px; margin: 0 auto 24px; border-radius: 50%;
+      background: linear-gradient(135deg, #6c7bff, #22d3ee);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 32px rgba(108,123,255,0.45);
     }
-    .icon { font-size: 4rem; margin-bottom: 24px; }
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.2rem; font-weight: 800;
-      margin-bottom: 16px;
+    .check svg { width: 36px; height: 36px; }
+    h1 { font-size: 2rem; font-weight: 850; letter-spacing: -0.025em; margin-bottom: 12px; }
+    h1 .grad {
+      background: linear-gradient(135deg, #6c7bff, #8b5cf6 55%, #22d3ee 115%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
     }
-    .gradient { 
-      background: linear-gradient(135deg, #7C3AED, #06B6D4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .sub { color: #8b95b3; line-height: 1.7; font-size: 0.96rem; margin-bottom: 30px; }
+    .next { text-align: left; margin-bottom: 32px; display: grid; gap: 12px; }
+    .next-step {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: rgba(148,163,184,0.055); border: 1px solid rgba(148,163,184,0.14);
+      border-radius: 14px; padding: 14px 16px;
     }
-    p { color: #7777AA; line-height: 1.7; font-size: 1rem; margin-bottom: 32px; }
+    .next-step .n {
+      flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px;
+      background: rgba(108,123,255,0.18); color: #aeb8ff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.85rem;
+    }
+    .next-step p { font-size: 0.88rem; color: #c3cbe4; }
+    .next-step strong { color: #eef2ff; }
     .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     a.btn {
-      display: inline-block;
-      text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 12px;
-      font-size: 0.9rem; font-weight: 700;
+      display: inline-block; text-decoration: none;
+      padding: 13px 26px; border-radius: 13px;
+      font-size: 0.9rem; font-weight: 750;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
+    a.btn:hover { transform: translateY(-1px); }
     a.btn-primary {
-      background: linear-gradient(135deg, #7C3AED, #4F46E5);
-      color: white;
-      box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+      background: linear-gradient(135deg, #6c7bff, #4f5df5); color: #fff;
+      box-shadow: 0 10px 28px rgba(108,123,255,0.4);
     }
     a.btn-secondary {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #E8E8FF;
+      background: rgba(148,163,184,0.09);
+      border: 1px solid rgba(148,163,184,0.24); color: #eef2ff;
     }
-    .confetti { font-size: 1.5rem; }
+    .reassure { margin-top: 22px; font-size: 0.75rem; color: #5d6685; }
   </style>
 </head>
 <body>
   <div class="card">
-    <div class="icon">🎉</div>
-    <h1>Welcome, <span class="gradient">{{ name }}</span>!</h1>
-    <p>
-      You're now part of <strong>EduPulse India</strong> — India's smartest MBA aspirant network.<br/><br/>
-      We'll reach out on WhatsApp with personalized college shortlists, study tips, and exam alerts.
-    </p>
-    <div class="actions">
-      <a href="/" class="btn btn-primary">← Back to Home</a>
-      <a href="/admin" class="btn btn-secondary">View Dashboard</a>
+    <div class="check" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
     </div>
+    <h1>Welcome, <span class="grad">{{ name }}</span>!</h1>
+    <p class="sub">You're on the list. A counsellor will reach out within 24 hours with your personalised MBA college shortlist.</p>
+    <div class="next">
+      <div class="next-step">
+        <span class="n">1</span>
+        <p><strong>Keep your phone handy.</strong> Our counsellor calls from an EduPulse number to understand your profile.</p>
+      </div>
+      <div class="next-step">
+        <span class="n">2</span>
+        <p><strong>Check WhatsApp.</strong> Your shortlist — cutoffs, fees vs. placements, deadlines — arrives there.</p>
+      </div>
+      <div class="next-step">
+        <span class="n">3</span>
+        <p><strong>Ask anything.</strong> GD-PI prep, scholarships, application help — that's what we're here for.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <a href="/landing" class="btn btn-primary">← Back to home</a>
+      <a href="/admin" class="btn btn-secondary">View dashboard</a>
+    </div>
+    <p class="reassure">100% free · No spam · Your data is never sold</p>
   </div>
 </body>
 </html>
