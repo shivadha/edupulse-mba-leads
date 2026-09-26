@@ -43,6 +43,18 @@ logger = logging.getLogger("edupulse.app")
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
+# Phase 2 + 3 blueprints (registered by parent agent; modules self-contained)
+try:
+    from alerts_routes import alerts_bp
+    app.register_blueprint(alerts_bp)
+except Exception as e:  # never let alerts break app boot
+    logging.getLogger("edupulse.app").warning("alerts blueprint not loaded: %s", e)
+try:
+    from predictor_routes import predictor_bp
+    app.register_blueprint(predictor_bp)
+except Exception as e:
+    logging.getLogger("edupulse.app").warning("predictor blueprint not loaded: %s", e)
+
 
 # ---------------------------------------------------------------------------
 # STARTUP — init DB + immediate scrape + background scheduler
