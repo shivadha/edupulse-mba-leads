@@ -24,7 +24,8 @@ def _run_cycle():
     logger.info("[Scheduler] Starting scrape cycle at %s", datetime.now().strftime("%H:%M:%S"))
     start = time.time()
     try:
-        items = run_all_scrapers()
+        # health_callback records per-source ok/fail into source_health table
+        items = run_all_scrapers(health_callback=db.record_source_health)
         added = db.save_intelligence_batch(items)
         duration = round(time.time() - start, 1)
         db.log_scrape_run(added, duration)

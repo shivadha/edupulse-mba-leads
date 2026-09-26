@@ -1,0 +1,36 @@
+# EduPulse India — scraper background service (systemd unit template)
+#
+# INSTALL (on your Linux server / this VM):
+#   1. Copy this file to /etc/systemd/system/edupulse-scraper.service
+#   2. Edit WorkingDirectory= and the python path below to match your install
+#   3. sudo systemctl daemon-reload
+#   4. sudo systemctl enable --now edupulse-scraper
+#   5. Check: sudo systemctl status edupulse-scraper
+#      Logs:  sudo journalctl -u edupulse-scraper -f
+#
+# This runs ONLY the scraper loop (no Flask). Run the web UI separately
+# if you need it:  python app.py   (or a second unit for edupulse-web).
+
+[Unit]
+Description=EduPulse India MBA lead-intelligence scraper
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# --- EDIT THESE TWO PATHS -------------------------------------------------
+WorkingDirectory=/home/hatch/workspace/projects/edupulse-mba-leads
+ExecStart=/usr/bin/python3 /home/hatch/workspace/projects/edupulse-mba-leads/service.py _daemon
+# --------------------------------------------------------------------------
+Environment=EDUPULSE_INTERVAL=300
+# Optional: richer Telegram monitoring via Telethon (get creds at my.telegram.org)
+#Environment=TELEGRAM_API_ID=
+#Environment=TELEGRAM_API_HASH=
+Restart=always
+RestartSec=30
+TimeoutStopSec=120
+StandardOutput=append:/home/hatch/workspace/projects/edupulse-mba-leads/data/scraper.log
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target

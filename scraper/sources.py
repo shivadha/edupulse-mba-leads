@@ -1,9 +1,9 @@
 """
 EduPulse India — EXPANDED Multi-Source Scraper
 =========================================================
-FREE DATA SOURCES (12 sources):
-  1.  Reddit        — r/CATprep, r/Indian_Academia, r/MBA, r/GMAT, r/IIM
-  2.  Pagalguy      — RSS feeds for CAT, MBA, XAT, GMAT, SNAP
+FREE DATA SOURCES (13 sources):
+  1.  Reddit        — r/CATprep, r/Indian_Academia, r/MBA, r/GMAT, r/IIM (+6 more)
+  2.  Pagalguy      — WordPress feed + live "Latest discussion" threads
   3.  Google News   — MBA/CAT India news (multiple query sets)
   4.  Google Trends — Daily trending India (MBA/CAT keywords)
   5.  College Portals — IIMs, XLRI, FMS, MDI, SPJIMR, ISB, IIFT etc.
@@ -11,11 +11,14 @@ FREE DATA SOURCES (12 sources):
   7.  Shiksha.com   — India's #1 education portal RSS + search
   8.  Careers360   — Education news RSS
   9.  MBA Universe  — RSS + articles on MBA prep
-  10. IndiaMBA      — Forum discussions
-  11. Telegram      — Public MBA groups (via t.me preview pages)
-  12. YouTube       — Video titles from MBA coaching channels (public RSS)
+  10. CollegeDunia  — Forum discussions
+  11. YouTube       — Video titles from MBA coaching channels (public RSS)
+  12. Telegram      — 2IIM / IMS / PrepLadder / CAT 2026 channels
+                      (t.me preview pages; Telethon monitor if API creds set)
+  13. India News    — Education RSS: HT, TOI, NDTV, The Hindu, Indian Express
 
-All data is deduplicated by UID (md5 hash), refreshed every 5 minutes.
+All data is deduplicated by UID (md5 hash), intent-scored (see scraper/intent.py),
+and refreshed every 5 minutes.
 """
 
 import re
@@ -32,6 +35,24 @@ from datetime import datetime, timezone
 from typing import Optional
 
 logger = logging.getLogger("edupulse.scraper")
+
+# Intent scoring (Phase 1) — rule-based, stdlib only
+try:
+    from scraper.intent import score_intent
+except ImportError:  # direct script execution fallback
+    from intent import score_intent
+
+
+def _apply_intent(item: dict) -> dict:
+    """Attach intent_level + intent_score to an item (idempotent)."""
+    if "intent_level" not in item or "intent_score" not in item:
+        try:
+            level, score = score_intent(item.get("title", ""), item.get("snippet", ""))
+        except Exception:
+            level, score = "low", 10
+        item["intent_level"] = level
+        item["intent_score"] = score
+    return item
 
 # ── User-Agent pool ──────────────────────────────────────────────
 _UA_POOL = [
@@ -159,6 +180,8 @@ def _parse_rss(xml_text: str, source_name: str) -> list[dict]:
             })
     except Exception as exc:
         logger.warning("[%s] RSS parse error: %s", source_name, exc)
+    for item in results:
+        _apply_intent(item)
     return results
 
 
@@ -229,19 +252,21 @@ def scrape_reddit() -> list[dict]:
             logger.warning("Reddit r/%s RSS: %s", sub, exc)
         time.sleep(0.8)
     logger.info("Reddit: %d posts", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
 # ═══════════════════════════════════════════════════════════════════
 # SOURCE 2 — PAGALGUY
 # ═══════════════════════════════════════════════════════════════════
+# NOTE (Phase 1 fix, 2026-09-26): the old /rss/{cat,mba,gmat,...} URLs are
+# dead — they return 200KB of HTML, not RSS. Pagalguy is now WordPress;
+# its real feed is https://www.pagalguy.com/feed/ (verified live).
+# We also pull fresh discussion-thread titles from the homepage's
+# "Latest discussion" section (high-value aspirant threads).
 PAGALGUY_FEEDS = [
-    "https://www.pagalguy.com/rss/cat",
-    "https://www.pagalguy.com/rss/mba",
-    "https://www.pagalguy.com/rss/gmat",
-    "https://www.pagalguy.com/rss/xat",
-    "https://www.pagalguy.com/rss/snap",
-    "https://www.pagalguy.com/rss/iim",
+    "https://www.pagalguy.com/feed/",
 ]
 
 def scrape_pagalguy() -> list[dict]:
@@ -251,23 +276,41 @@ def scrape_pagalguy() -> list[dict]:
         if xml_text and ("<rss" in xml_text or "<feed" in xml_text):
             items = _parse_rss(xml_text, "pagalguy")
             results.extend(items)
-        elif xml_text:
-            # HTML fallback
-            titles = re.findall(r'<h[12][^>]*>([^<]{15,180})</h[12]>', xml_text)
-            for t in titles[:8]:
-                t = t.strip()
+        time.sleep(0.7)
+
+    # Homepage "Latest discussion" threads — real aspirant conversations
+    try:
+        home = _fetch("https://www.pagalguy.com/", timeout=20)
+        if home:
+            # Discussion thread links: /discussions/... with descriptive titles
+            threads = re.findall(
+                r'href="(https://www\.pagalguy\.com/discussions/[^"]+)"[^>]*>([^<]{12,180})<',
+                home, re.IGNORECASE,
+            )
+            seen = set()
+            for href, title in threads:
+                title = re.sub(r'\s+', ' ', title).strip()
+                if href in seen or len(title) < 12:
+                    continue
+                seen.add(href)
                 results.append({
-                    "uid": _uid("pagalguy", t),
+                    "uid": _uid("pagalguy", href),
                     "source": "pagalguy",
-                    "title": t[:220],
-                    "snippet": "",
-                    "url": url.replace("/rss/", "/"),
-                    "exam_hint": _detect_exam(t.lower()),
-                    "city_hint": _detect_city(t.lower()),
+                    "title": title[:220],
+                    "snippet": "Live discussion thread on Pagalguy — India's MBA forum",
+                    "url": href,
+                    "exam_hint": _detect_exam(title.lower()),
+                    "city_hint": _detect_city(title.lower()),
                     "scraped_at": _now_iso(),
                 })
-        time.sleep(0.7)
+                if len(seen) >= 15:
+                    break
+    except Exception as exc:
+        logger.warning("Pagalguy homepage threads: %s", exc)
+
     logger.info("Pagalguy: %d items", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
@@ -300,6 +343,8 @@ def scrape_google_news() -> list[dict]:
             results.extend(items)
         time.sleep(0.4)
     logger.info("Google News: %d items", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
@@ -352,6 +397,8 @@ def scrape_google_trends() -> list[dict]:
     except Exception as exc:
         logger.warning("Google Trends: %s", exc)
     logger.info("Google Trends: %d items", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
@@ -409,6 +456,8 @@ def scrape_college_portals() -> list[dict]:
         results.append(item)
         time.sleep(0.8)
     logger.info("College portals: %d records", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
@@ -449,6 +498,8 @@ def scrape_quora_via_ddg() -> list[dict]:
             })
         time.sleep(1.2)
     logger.info("Quora/DDG: %d items", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
@@ -501,6 +552,8 @@ def scrape_shiksha() -> list[dict]:
             })
         time.sleep(0.8)
     logger.info("Shiksha: %d items", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
@@ -547,6 +600,8 @@ def scrape_careers360() -> list[dict]:
             })
         time.sleep(0.6)
     logger.info("Careers360: %d items", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
@@ -595,6 +650,8 @@ def scrape_mba_universe() -> list[dict]:
             })
         time.sleep(0.8)
     logger.info("MBA Universe: %d items", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
@@ -635,6 +692,8 @@ def scrape_collegedunia() -> list[dict]:
             })
         time.sleep(0.7)
     logger.info("CollegeDunia: %d items", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
@@ -698,24 +757,101 @@ def scrape_youtube_rss() -> list[dict]:
             logger.warning("YouTube RSS %s: %s", channel_id, exc)
         time.sleep(0.5)
     logger.info("YouTube: %d items", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
 # ═══════════════════════════════════════════════════════════════════
 # SOURCE 12 — TELEGRAM PUBLIC CHANNELS (via t.me preview pages)
 # ═══════════════════════════════════════════════════════════════════
+# NOTE (Phase 1 fix, 2026-09-26): the previous channel list was dead —
+# all 8 handles returned empty preview shells ("Contact @..." pages).
+# These 4 were verified live on 2026-09-26 via t.me/s/ preview HTML
+# (each returned 20 message wraps):
 TELEGRAM_CHANNELS = [
-    "catprep2025",
-    "mbaaspirantsIndia",
-    "IIMadmissions",
-    "CATPreparation",
-    "XATprep",
-    "MBAcoachingIndia",
-    "GMATprep",
-    "CATquantprep",
+    "twoiim",        # 2IIM CAT Preparation (channel)
+    "imscat25prep",  # IMS CAT Preparation (channel)
+    "CATPrepLadder", # PrepLadder CAT (channel)
+    "cat_2026_iim",  # CAT 2026 aspirant community
 ]
 
+# Optional upgrade: Telethon-based monitoring (needs API credentials).
+# Get them free at https://my.telegram.org -> "API development tools".
+# Set TELEGRAM_API_ID and TELEGRAM_API_HASH env vars to activate.
+# Telethon reads full message history (not just the 20 preview posts)
+# and can also list group members for the DM funnel (Phase 2).
+try:
+    from telethon import TelegramClient as _TgClient  # type: ignore
+    _TELETHON = True
+except Exception:
+    _TgClient = None
+    _TELETHON = False
+
+
+def _scrape_telegram_telethon(max_per_channel: int = 30) -> list[dict]:
+    """Telethon monitor — only runs when API creds are configured."""
+    import os
+    import asyncio
+    api_id = os.getenv("TELEGRAM_API_ID", "")
+    api_hash = os.getenv("TELEGRAM_API_HASH", "")
+    if not (_TELETHON and api_id and api_hash):
+        return []
+
+    results = []
+
+    async def _run():
+        client = _TgClient("edupulse_tg", int(api_id), api_hash)
+        await client.start()
+        try:
+            for channel in TELEGRAM_CHANNELS:
+                try:
+                    msgs = await client.get_messages(channel, limit=max_per_channel)
+                    for m in msgs:
+                        text = (m.text or "").strip()
+                        if len(text) < 20:
+                            continue
+                        full = text.lower()
+                        if not any(k in full for k in [
+                            "cat", "mba", "iim", "xat", "gmat", "exam", "coaching",
+                            "percentile", "admission", "bschool",
+                        ]):
+                            continue
+                        results.append({
+                            "uid": _uid("telegram", f"{channel}:{m.id}"),
+                            "source": "telegram",
+                            "channel": f"@{channel}",
+                            "title": text[:120] + ("..." if len(text) > 120 else ""),
+                            "snippet": text[:300],
+                            "url": f"https://t.me/{channel}/{m.id}",
+                            "exam_hint": _detect_exam(full),
+                            "city_hint": _detect_city(full),
+                            "scraped_at": _now_iso(),
+                        })
+                except Exception as exc:
+                    logger.warning("Telethon @%s: %s", channel, exc)
+                await asyncio.sleep(1)
+        finally:
+            await client.disconnect()
+
+    try:
+        asyncio.run(_run())
+    except Exception as exc:
+        logger.warning("Telethon monitor failed: %s", exc)
+    logger.info("Telegram (telethon): %d items", len(results))
+    for _it in results:
+        _apply_intent(_it)
+    return results
+
+
 def scrape_telegram_public() -> list[dict]:
+    # Prefer Telethon when credentials are configured (full history).
+    tg_items = _scrape_telegram_telethon()
+    if tg_items:
+        return tg_items
+
+    # Fallback: t.me/s/ preview pages (last ~20 posts, no login needed).
+    import html as _html_mod
     results = []
     for channel in TELEGRAM_CHANNELS:
         url = f"https://t.me/s/{channel}"
@@ -728,8 +864,9 @@ def scrape_telegram_public() -> list[dict]:
                 r'class="tgme_widget_message_text[^"]*"[^>]*>(.*?)</div>',
                 html, re.DOTALL
             )
-            for msg_html in messages[:6]:
+            for msg_html in messages[:10]:
                 text = re.sub(r'<[^>]+>', '', msg_html).strip()
+                text = _html_mod.unescape(text)  # decode &#33; &#39; &quot; etc.
                 text = re.sub(r'\s+', ' ', text)
                 if len(text) < 20:
                     continue
@@ -754,6 +891,8 @@ def scrape_telegram_public() -> list[dict]:
             logger.warning("Telegram @%s: %s", channel, exc)
         time.sleep(0.8)
     logger.info("Telegram: %d items", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
@@ -786,6 +925,8 @@ def scrape_india_news() -> list[dict]:
                 results.append(item)
         time.sleep(0.4)
     logger.info("India News: %d relevant items", len(results))
+    for _it in results:
+        _apply_intent(_it)
     return results
 
 
@@ -854,8 +995,12 @@ ALL_SCRAPERS = [
 ]
 
 
-def run_all_scrapers() -> list[dict]:
-    """Run all 13 scrapers, return de-duplicated results."""
+def run_all_scrapers(health_callback=None) -> list[dict]:
+    """Run all 13 scrapers, return de-duplicated results.
+
+    health_callback(name, ok, items, error) is called per source when given —
+    scheduler.py / service.py pass database.record_source_health here.
+    """
     all_items = []
     seen_uids = set()
 
@@ -868,11 +1013,16 @@ def run_all_scrapers() -> list[dict]:
                 uid = item.get("uid", "")
                 if uid and uid not in seen_uids:
                     seen_uids.add(uid)
+                    _apply_intent(item)  # safety net: every item gets scored
                     all_items.append(item)
                     new_count += 1
             logger.info("[Scraper] %s → %d new items", name, new_count)
+            if health_callback:
+                health_callback(name, True, new_count, None)
         except Exception as exc:
             logger.error("[Scraper] %s FAILED: %s", name, exc)
+            if health_callback:
+                health_callback(name, False, 0, str(exc)[:200])
 
     logger.info("[Scraper] Total unique items: %d", len(all_items))
     return all_items
@@ -882,7 +1032,7 @@ def get_source_list() -> list[dict]:
     """Return metadata about all sources for the admin UI."""
     return [
         {"key": "reddit",          "label": "Reddit India",       "icon": "🔴", "desc": "r/CATprep, r/Indian_Academia, r/MBA, r/IIM + 7 more"},
-        {"key": "pagalguy",        "label": "Pagalguy",           "icon": "💬", "desc": "CAT, MBA, GMAT, XAT, SNAP RSS feeds"},
+        {"key": "pagalguy",        "label": "Pagalguy",           "icon": "💬", "desc": "MBA forum feed + live discussion threads"},
         {"key": "google_news",     "label": "Google News",        "icon": "📰", "desc": "12 MBA/CAT query sets, India geo-targeted"},
         {"key": "google_trends",   "label": "Google Trends",      "icon": "📈", "desc": "Daily trending India searches"},
         {"key": "college_portal",  "label": "College Portals",    "icon": "🏛️", "desc": "20 B-schools: IIMs, XLRI, FMS, ISB, SPJIMR..."},
@@ -892,6 +1042,6 @@ def get_source_list() -> list[dict]:
         {"key": "mba_universe",    "label": "MBA Universe",       "icon": "🌐", "desc": "MBA-focused news & college data"},
         {"key": "collegedunia",    "label": "CollegeDunia",       "icon": "🏫", "desc": "India's largest college discovery portal"},
         {"key": "youtube",         "label": "YouTube RSS",        "icon": "▶️", "desc": "CAT coaching channels: 2IIM, CL, IMS, TIME"},
-        {"key": "telegram",        "label": "Telegram Channels",  "icon": "✈️", "desc": "8 public MBA/CAT Telegram groups"},
+        {"key": "telegram",        "label": "Telegram Channels",  "icon": "✈️", "desc": "2IIM, IMS, PrepLadder, CAT 2026 channels (+Telethon if configured)"},
         {"key": "india_news",      "label": "India News RSS",     "icon": "🗞️", "desc": "HT, TOI, NDTV, The Hindu, Indian Express"},
     ]

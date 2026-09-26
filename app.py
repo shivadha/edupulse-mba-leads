@@ -225,6 +225,34 @@ def api_db_stats():
     return jsonify(conn_info)
 
 
+@app.route("/api/health")
+def api_health():
+    """Phase 1: per-source scraper health + scheduler + high-intent counts."""
+    from scraper.sources import get_source_list
+    sources = {s["key"]: s for s in get_source_list()}
+    health = []
+    for h in db.get_source_health():
+        key = h.get("source")
+        meta = sources.get(key, {})
+        health.append({
+            "source": key,
+            "label": meta.get("label", key),
+            "healthy": h.get("last_error") is None and bool(h.get("last_ok")),
+            "last_ok": h.get("last_ok"),
+            "last_error": h.get("last_error"),
+            "items_last_run": h.get("items_last_run"),
+            "runs_ok": h.get("runs_ok"),
+            "runs_fail": h.get("runs_fail"),
+        })
+    return jsonify({
+        "ok": True,
+        "scheduler": sched.status(),
+        "last_scrape": db.get_last_scrape_time(),
+        "sources": health,
+        "high_intent_total": len(db.get_high_intent(limit=100000)),
+    })
+
+
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     print("\n" + "="*60)

@@ -64,6 +64,28 @@ def init_db():
         duration_s  REAL
     )""")
 
+    # --- SOURCE HEALTH (per-source success/failure tracking, Phase 1) ---
+    c.execute("""
+    CREATE TABLE IF NOT EXISTS source_health (
+        source        TEXT PRIMARY KEY,
+        last_ok       TEXT,
+        last_error    TEXT,
+        items_last_run INTEGER DEFAULT 0,
+        runs_ok       INTEGER DEFAULT 0,
+        runs_fail     INTEGER DEFAULT 0,
+        updated_at    TEXT DEFAULT (datetime('now'))
+    )""")
+
+    conn.commit()
+
+    # Migration-safe: add intent columns to intelligence if missing
+    # (ALTER TABLE ADD COLUMN IF NOT EXISTS pattern via PRAGMA check)
+    cols = {r[1] for r in c.execute("PRAGMA table_info(intelligence)").fetchall()}
+    if "intent_level" not in cols:
+        c.execute("ALTER TABLE intelligence ADD COLUMN intent_level TEXT DEFAULT 'low'")
+    if "intent_score" not in cols:
+        c.execute("ALTER TABLE intelligence ADD COLUMN intent_score INTEGER DEFAULT 0")
+
     conn.commit()
     conn.close()
 
@@ -192,15 +214,18 @@ def save_intelligence_batch(items: list[dict]) -> int:
         try:
             extra = {k: v for k, v in item.items()
                      if k not in ("uid", "source", "title", "snippet", "url",
-                                  "college", "exam_hint", "city_hint", "scraped_at")}
+                                  "college", "exam_hint", "city_hint",
+                                  "intent_level", "intent_score", "scraped_at")}
             c.execute("""
                 INSERT OR IGNORE INTO intelligence
-                    (uid, source, title, snippet, url, college, exam_hint, city_hint, extra_json, scraped_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    (uid, source, title, snippet, url, college, exam_hint, city_hint,
+                     intent_level, intent_score, extra_json, scraped_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 item.get("uid"), item.get("source"), item.get("title"),
                 item.get("snippet"), item.get("url"), item.get("college"),
                 item.get("exam_hint"), item.get("city_hint"),
+                item.get("intent_level", "low"), item.get("intent_score", 0),
                 json.dumps(extra), item.get("scraped_at"),
             ))
             if c.rowcount:
@@ -274,3 +299,60 @@ def get_db_summary() -> dict:
         "by_source": [dict(r) for r in by_src],
         "last_run": dict(last) if last else None,
     }
+
+
+# ---------------------------------------------------------------------------
+# SOURCE HEALTH (Phase 1)
+# ---------------------------------------------------------------------------
+def record_source_health(source: str, ok: bool, items: int = 0, error: str = None):
+    """Upsert per-source health: last run outcome, item count, error."""
+    conn = _connect()
+    now = datetime.now(timezone.utc).isoformat()
+    if ok:
+        conn.execute("""
+            INSERT INTO source_health (source, last_ok, last_error, items_last_run,
+                                       runs_ok, runs_fail, updated_at)
+            VALUES (?, ?, NULL, ?, 1, 0, ?)
+            ON CONFLICT(source) DO UPDATE SET
+                last_ok=excluded.last_ok,
+                last_error=NULL,
+                items_last_run=excluded.items_last_run,
+                runs_ok=runs_ok+1,
+                updated_at=excluded.updated_at
+        """, (source, now, items, now))
+    else:
+        conn.execute("""
+            INSERT INTO source_health (source, last_ok, last_error, items_last_run,
+                                       runs_ok, runs_fail, updated_at)
+            VALUES (?, NULL, ?, 0, 0, 1, ?)
+            ON CONFLICT(source) DO UPDATE SET
+                last_error=excluded.last_error,
+                items_last_run=0,
+                runs_fail=runs_fail+1,
+                updated_at=excluded.updated_at
+        """, (source, (error or "unknown error")[:300], now))
+    conn.commit()
+    conn.close()
+
+
+def get_source_health() -> list[dict]:
+    """All sources with their last-known health, newest first."""
+    conn = _connect()
+    rows = conn.execute(
+        "SELECT * FROM source_health ORDER BY updated_at DESC"
+    ).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
+
+def get_high_intent(limit: int = 50) -> list[dict]:
+    """Top high-intent items — the call queue for Phase 2 alerts."""
+    conn = _connect()
+    rows = conn.execute(
+        """SELECT * FROM intelligence
+           WHERE intent_level='high'
+           ORDER BY intent_score DESC, id DESC LIMIT ?""",
+        (limit,),
+    ).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
