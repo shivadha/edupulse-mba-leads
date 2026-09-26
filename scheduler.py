@@ -20,6 +20,7 @@ def _run_cycle():
     """Single scrape cycle: run all scrapers + save to DB."""
     import database as db
     from scraper.sources import run_all_scrapers
+    import alerts  # Phase 2: counselor real-time alerts
 
     logger.info("[Scheduler] Starting scrape cycle at %s", datetime.now().strftime("%H:%M:%S"))
     start = time.time()
@@ -32,6 +33,15 @@ def _run_cycle():
         _last_run["time"] = datetime.now().strftime("%d %b %Y %H:%M:%S")
         _last_run["added"] = added
         logger.info("[Scheduler] Cycle done — %d new items in %.1fs", added, duration)
+
+        # Phase 2: alert counselor on new high-intent items.
+        # Alert failures must NEVER break the scrape cycle.
+        try:
+            alert_result = alerts.check_and_alert(db.DB_PATH)
+            if alert_result["sent"]:
+                logger.info("[Scheduler] Alerts sent: %d", alert_result["sent"])
+        except Exception as alert_exc:
+            logger.error("[Scheduler] Alert check failed (scrape unaffected): %s", alert_exc)
     except Exception as exc:
         logger.error("[Scheduler] Cycle failed: %s", exc)
 
