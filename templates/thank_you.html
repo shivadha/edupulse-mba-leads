@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Thank You — EduPulse India</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #090A12;
+      color: #E8E8FF;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .card {
+      background: #0F1120;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 60px 48px;
+      text-align: center;
+      max-width: 520px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 60px rgba(124,58,237,0.2);
+      animation: fadeUp 0.6s ease forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .icon { font-size: 4rem; margin-bottom: 24px; }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem; font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .gradient { 
+      background: linear-gradient(135deg, #7C3AED, #06B6D4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    p { color: #7777AA; line-height: 1.7; font-size: 1rem; margin-bottom: 32px; }
+    .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    a.btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 0.9rem; font-weight: 700;
+    }
+    a.btn-primary {
+      background: linear-gradient(135deg, #7C3AED, #4F46E5);
+      color: white;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+    }
+    a.btn-secondary {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #E8E8FF;
+    }
+    .confetti { font-size: 1.5rem; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">🎉</div>
+    <h1>Welcome, <span class="gradient">{{ name }}</span>!</h1>
+    <p>
+      You're now part of <strong>EduPulse India</strong> — India's smartest MBA aspirant network.<br/><br/>
+      We'll reach out on WhatsApp with personalized college shortlists, study tips, and exam alerts.
+    </p>
+    <div class="actions">
+      <a href="/" class="btn btn-primary">← Back to Home</a>
+      <a href="/admin" class="btn btn-secondary">View Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

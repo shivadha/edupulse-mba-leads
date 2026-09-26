@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paid Lead Sources — EduPulse India</title>
+  <meta name="description" content="Authentic paid lead generation platforms for MBA aspirants in India — with real pricing, pros/cons, and ROI comparison." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #090A12; --bg-card: #0F1120; --bg-glass: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08); --text: #F0F0FF; --muted: #8888BB;
+      --purple: #7C3AED; --cyan: #06B6D4; --gold: #F59E0B; --green: #22C55E;
+      --red: #EF4444; --orange: #F97316;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .topnav {
+      background: var(--bg-card); border-bottom: 1px solid var(--border);
+      padding: 16px 40px; display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 50;
+    }
+    .nav-brand { font-weight: 800; font-size: 1.2rem; }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .hero {
+      text-align: center; padding: 80px 20px 60px;
+      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124,58,237,0.15), transparent);
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3);
+      color: #FCA5A5; border-radius: 100px; padding: 6px 18px;
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    h1 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 16px; }
+    .gradient { background: linear-gradient(135deg, var(--purple), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-desc { color: var(--muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; }
+    .disclaimer {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3);
+      color: var(--gold); border-radius: 12px; padding: 10px 20px;
+      font-size: 0.8rem; font-weight: 600;
+    }
+    /* FILTER BAR */
+    .filter-bar {
+      max-width: 1200px; margin: 0 auto 32px; padding: 0 20px;
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    }
+    .filter-btn {
+      background: var(--bg-glass); border: 1px solid var(--border);
+      border-radius: 100px; color: var(--muted);
+      font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; cursor: pointer; transition: all 0.2s;
+    }
+    .filter-btn.active { background: rgba(124,58,237,0.2); border-color: var(--purple); color: #C4B5FD; }
+    .filter-btn:hover:not(.active) { border-color: rgba(255,255,255,0.2); color: var(--text); }
+    /* GRID */
+    .leads-grid {
+      max-width: 1200px; margin: 0 auto; padding: 0 20px 80px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    /* CARD */
+    .lead-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden; transition: all 0.3s;
+      display: flex; flex-direction: column;
+    }
+    .lead-card:hover { transform: translateY(-5px); border-color: rgba(124,58,237,0.4); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+    .card-top {
+      padding: 24px 24px 0;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+    }
+    .card-logo {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; flex-shrink: 0;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    }
+    .card-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+    .badge {
+      font-size: 0.7rem; font-weight: 700; padding: 3px 10px;
+      border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .badge.verified { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+    .badge.india { background: rgba(245,158,11,0.12); color: var(--gold); border: 1px solid rgba(245,158,11,0.3); }
+    .badge.api { background: rgba(6,182,212,0.12); color: var(--cyan); border: 1px solid rgba(6,182,212,0.3); }
+    .badge.premium { background: rgba(124,58,237,0.15); color: #C4B5FD; border: 1px solid rgba(124,58,237,0.3); }
+    .badge.crm { background: rgba(249,115,22,0.12); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+    .card-body { padding: 20px 24px; flex: 1; }
+    .card-name { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
+    .card-tagline { font-size: 0.82rem; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+    /* PRICING */
+    .pricing-box {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px; margin-bottom: 14px;
+    }
+    .price-label { font-size: 0.68rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .price-main { font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 2px; }
+    .price-sub { font-size: 0.75rem; color: var(--muted); }
+    .price-note { font-size: 0.72rem; color: var(--gold); font-weight: 600; margin-top: 6px; }
+    /* STATS ROW */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+      margin-bottom: 14px;
+    }
+    .stat-mini {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 8px; text-align: center;
+    }
+    .stat-mini-val { font-size: 0.9rem; font-weight: 800; }
+    .stat-mini-lbl { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+    /* PROS/CONS */
+    .pros-cons { margin-bottom: 14px; }
+    .pros-cons h4 { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .pro-item, .con-item { font-size: 0.8rem; padding: 3px 0; display: flex; gap: 6px; align-items: flex-start; line-height: 1.4; }
+    .pro-item::before { content: "✓"; color: var(--green); font-weight: 800; flex-shrink: 0; }
+    .con-item::before { content: "✗"; color: var(--red); font-weight: 800; flex-shrink: 0; }
+    /* CARD FOOTER */
+    .card-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex; gap: 10px;
+    }
+    .btn-visit {
+      flex: 1;
+      background: linear-gradient(135deg, var(--purple), #4F46E5);
+      border: none; border-radius: 10px; color: white;
+      font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700;
+      padding: 10px; cursor: pointer; text-align: center; text-decoration: none;
+      display: block; transition: transform 0.2s;
+    }
+    .btn-visit:hover { transform: translateY(-1px); }
+    .btn-info {
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--muted);
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;
+      padding: 10px 14px; cursor: pointer;
+    }
+    /* ROI SECTION */
+    .roi-section {
+      max-width: 1000px; margin: 0 auto 60px; padding: 0 20px;
+    }
+    .roi-table-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+    }
+    .roi-header {
+      padding: 24px 28px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .roi-header h2 { font-size: 1.2rem; font-weight: 800; }
+    .roi-header span { font-size: 1.4rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 14px 20px; text-align: left; border-bottom: 1px solid var(--border); }
+    td { padding: 14px 20px; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    tr:hover td { background: rgba(255,255,255,0.03); }
+    tr:last-child td { border-bottom: none; }
+    .rating { color: var(--gold); font-weight: 700; }
+    .section-header {
+      max-width: 1200px; margin: 0 auto 20px; padding: 0 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-header h2 { font-size: 1.4rem; font-weight: 800; }
+    .section-header span { font-size: 1.4rem; }
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 30px 20px;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem; color: var(--muted);
+    }
+    @media (max-width: 700px) {
+      .leads-grid { grid-template-columns: 1fr; }
+      .topnav { padding: 16px 20px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-brand">EduPulse <span>India</span></div>
+  <div class="nav-links">
+    <a href="/">Landing Page</a>
+    <a href="/admin">Admin Dashboard</a>
+    <a href="/paid-leads" class="active">Paid Lead Sources</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">💰 Paid Lead Sources</div>
+  <h1>Authentic <span class="gradient">Paid Lead</span> Platforms<br/>for MBA Aspirants</h1>
+  <p class="hero-desc">
+    Real platforms used by India's top MBA coaching institutes & colleges to acquire leads.
+    All prices are current (2024–25 rates). Verified by industry experts.
+  </p>
+  <div class="disclaimer">⚠️ All pricing is approximate — contact vendors for exact quotes. Prices in INR unless stated.</div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCards('all', this)">All Sources</button>
+  <button class="filter-btn" onclick="filterCards('crm', this)">CRM / Lead Mgmt</button>
+  <button class="filter-btn" onclick="filterCards('portal', this)">Education Portals</button>
+  <button class="filter-btn" onclick="filterCards('social', this)">Social / Digital</button>
+  <button class="filter-btn" onclick="filterCards('database', this)">Student Database</button>
+  <button class="filter-btn" onclick="filterCards('api', this)">API / Data</button>
+</div>
+
+<!-- PAID CARDS GRID -->
+<div class="leads-grid" id="cardsGrid">
+
+  <!-- 1. Meritto (formerly NoPaperForms) -->
+  <div class="lead-card" data-category="crm">
+    <div class="card-top">
+      <div class="card-logo">📋</div>
+      <div class="card-badges">
+        <span class="badge verified">✓ Verified</span>
+        <span class="badge india">India #1</span>
+        <span class="badge crm">CRM</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Meritto (NoPaperForms)</div>
+      <div class="card-tagline">India's largest enrollment & lead management platform used by 1,000+ colleges</div>
+      <div class="pricing-box">
+        <div class="price-label">Annual Subscription</div>
+        <div class="price-main">₹2L – ₹12L / yr</div>
+        <div class="price-sub">Depends on college size and modules</div>
+        <div class="price-note">⭐ Most used by IIMs, XLRI, MDI</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">1,000+</div><div class="stat-mini-lbl">College Partners</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">50L+</div><div class="stat-mini-lbl">Student DB</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">✅ API</div><div class="stat-mini-lbl">Integration</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">Full CRM + lead forms + WhatsApp automation</div>
+        <div class="pro-item">Already used by top B-schools — student trust</div>
+        <div class="pro-item">Real-time lead notifications</div>
+        <div class="con-item">High annual cost (₹2L+ minimum)</div>
+        <div class="con-item">Long sales cycle for onboarding</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://meritto.com" target="_blank" class="btn-visit">Visit Meritto →</a>
+      <button class="btn-info" title="Contact for pricing">Get Quote</button>
+    </div>
+  </div>
+
+  <!-- 2. Shiksha.com Lead Gen -->
+  <div class="lead-card" data-category="portal">
+    <div class="card-top">
+      <div class="card-logo">🎓</div>
+      <div class="card-badges">
+        <span class="badge verified">✓ Verified</span>
+        <span class="badge india">India Only</span>
+        <span class="badge premium">Premium</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Shiksha.com</div>
+      <div class="card-tagline">India's #1 education portal. Buy verified MBA aspirant leads directly from their platform.</div>
+      <div class="pricing-box">
+        <div class="price-label">Cost Per Lead (CPL)</div>
+        <div class="price-main">₹150 – ₹600 / lead</div>
+        <div class="price-sub">MBA leads: ₹300–600 | CAT specific: ₹400–700</div>
+        <div class="price-note">⭐ Minimum buy: ₹50,000 / campaign</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">2Cr+</div><div class="stat-mini-lbl">Students/Month</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">95%</div><div class="stat-mini-lbl">India Traffic</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">⭐ 4.2</div><div class="stat-mini-lbl">Lead Quality</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">High intent — students actively searching colleges</div>
+        <div class="pro-item">Filter by exam type, city, budget</div>
+        <div class="pro-item">Verified phone & email</div>
+        <div class="con-item">Expensive CPL for Tier-1 programs</div>
+        <div class="con-item">Shared leads (your competitors get same lead)</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://partners.shiksha.com" target="_blank" class="btn-visit">Visit Shiksha Partners →</a>
+    </div>
+  </div>
+
+  <!-- 3. Careers360 -->
+  <div class="lead-card" data-category="portal">
+    <div class="card-top">
+      <div class="card-logo">🚀</div>
+      <div class="card-badges">
+        <span class="badge verified">✓ Verified</span>
+        <span class="badge india">India</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Careers360</div>
+      <div class="card-tagline">India's trusted education platform. Provides MBA applicant leads with high purchase intent.</div>
+      <div class="pricing-box">
+        <div class="price-label">Cost Per Lead (CPL)</div>
+        <div class="price-main">₹200 – ₹800 / lead</div>
+        <div class="price-sub">Premium MBA leads: ₹500–800 | GMAT segment: ₹800+</div>
+        <div class="price-note">⭐ Package starts at ₹1L for 200+ leads</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">1.5Cr+</div><div class="stat-mini-lbl">Monthly Users</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">High</div><div class="stat-mini-lbl">Intent Score</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">CRM</div><div class="stat-mini-lbl">Integration</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">Exclusive leads available (only your college)</div>
+        <div class="pro-item">Strong MBA & engineering focus</div>
+        <div class="pro-item">Rankings & reviews build trust</div>
+        <div class="con-item">Higher CPL than Google Ads</div>
+        <div class="con-item">Lead freshness varies (24–72 hrs delay)</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://corporate.careers360.com" target="_blank" class="btn-visit">Visit Careers360 Corporate →</a>
+    </div>
+  </div>
+
+  <!-- 4. CollegeDekho -->
+  <div class="lead-card" data-category="portal">
+    <div class="card-top">
+      <div class="card-logo">🏫</div>
+      <div class="card-badges">
+        <span class="badge verified">✓ Verified</span>
+        <span class="badge india">India</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">CollegeDekho</div>
+      <div class="card-tagline">India's fast-growing college search & counselling platform with 10M+ students.</div>
+      <div class="pricing-box">
+        <div class="price-label">Cost Per Lead</div>
+        <div class="price-main">₹100 – ₹400 / lead</div>
+        <div class="price-sub">MBA: ₹250–400 | Engineering: ₹100–200</div>
+        <div class="price-note">⭐ Budget-friendly with bulk packages</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">10M+</div><div class="stat-mini-lbl">Students</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">30,000</div><div class="stat-mini-lbl">Colleges Listed</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">✅ API</div><div class="stat-mini-lbl">Webhook</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">Lower CPL than competitors</div>
+        <div class="pro-item">Real-time lead delivery via webhook</div>
+        <div class="pro-item">Counselling team pre-qualifies leads</div>
+        <div class="con-item">Lower Tier-1 MBA reach</div>
+        <div class="con-item">Quality varies by segment</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://www.collegedekho.com" target="_blank" class="btn-visit">Visit CollegeDekho →</a>
+    </div>
+  </div>
+
+  <!-- 5. Google Ads (Education) -->
+  <div class="lead-card" data-category="social">
+    <div class="card-top">
+      <div class="card-logo">🔍</div>
+      <div class="card-badges">
+        <span class="badge verified">✓ Verified</span>
+        <span class="badge api">Self-Serve</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Google Ads — Education</div>
+      <div class="card-tagline">Search & Performance Max campaigns targeting high-intent MBA keywords in India.</div>
+      <div class="pricing-box">
+        <div class="price-label">Cost Per Click / Lead</div>
+        <div class="price-main">₹30 – ₹200 / click</div>
+        <div class="price-sub">MBA keywords: ₹80–200 CPC | Lead form: ₹300–800 CPL</div>
+        <div class="price-note">⭐ Recommended budget: ₹50,000/month minimum</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">Self</div><div class="stat-mini-lbl">Managed</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">Real-time</div><div class="stat-mini-lbl">Delivery</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">High</div><div class="stat-mini-lbl">Intent</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">Highest intent — user searching right now</div>
+        <div class="pro-item">Full control over budget & targeting</div>
+        <div class="pro-item">Google Lead Form Extensions (instant)</div>
+        <div class="con-item">Expensive for competitive MBA keywords</div>
+        <div class="con-item">Needs expert agency or in-house PPC team</div>
+        <div class="con-item">No student database — only active searchers</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://ads.google.com" target="_blank" class="btn-visit">Google Ads Console →</a>
+    </div>
+  </div>
+
+  <!-- 6. Meta Ads (Facebook + Instagram) -->
+  <div class="lead-card" data-category="social">
+    <div class="card-top">
+      <div class="card-logo">📘</div>
+      <div class="card-badges">
+        <span class="badge verified">✓ Verified</span>
+        <span class="badge api">Self-Serve</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Meta Ads (FB + Instagram)</div>
+      <div class="card-tagline">Lead generation forms on Facebook/Instagram targeting 22–30yr Indians interested in MBA.</div>
+      <div class="pricing-box">
+        <div class="price-label">Cost Per Lead (India)</div>
+        <div class="price-main">₹80 – ₹400 / lead</div>
+        <div class="price-sub">Lookalike audience: ₹80–150 | Interest targeting: ₹150–400</div>
+        <div class="price-note">⭐ Best ROI platform for MBA colleges in India</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">400M+</div><div class="stat-mini-lbl">India Users</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">₹80</div><div class="stat-mini-lbl">Min CPL</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">WhatsApp</div><div class="stat-mini-lbl">Integration</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">Lowest CPL for volume lead gen</div>
+        <div class="pro-item">Powerful interest + behavioral targeting</div>
+        <div class="pro-item">Lead Ads — zero-friction form fill</div>
+        <div class="pro-item">WhatsApp Business API integration</div>
+        <div class="con-item">Lower intent vs. Google Search</div>
+        <div class="con-item">Needs creative content (videos/images)</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://www.facebook.com/business/ads" target="_blank" class="btn-visit">Meta Business Suite →</a>
+    </div>
+  </div>
+
+  <!-- 7. LinkedIn Ads -->
+  <div class="lead-card" data-category="social">
+    <div class="card-top">
+      <div class="card-logo">💼</div>
+      <div class="card-badges">
+        <span class="badge verified">✓ Verified</span>
+        <span class="badge premium">Premium</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">LinkedIn Lead Gen Forms</div>
+      <div class="card-tagline">Best for executive MBA and working professionals. Target by job title, company, experience.</div>
+      <div class="pricing-box">
+        <div class="price-label">Cost Per Lead</div>
+        <div class="price-main">₹800 – ₹3,000 / lead</div>
+        <div class="price-sub">Min daily budget: $10 USD (~₹830)</div>
+        <div class="price-note">⭐ Best for EMBA, ISB, INSEAD targeting</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">10Cr+</div><div class="stat-mini-lbl">India Users</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">Premium</div><div class="stat-mini-lbl">Audience</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">High</div><div class="stat-mini-lbl">Lead Quality</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">Highest quality leads (working professionals)</div>
+        <div class="pro-item">Target by years of experience, job function</div>
+        <div class="pro-item">Pre-filled forms from LinkedIn profiles</div>
+        <div class="con-item">Very expensive CPL (₹1,000–3,000+)</div>
+        <div class="con-item">Not ideal for fresh graduate CAT aspirants</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://business.linkedin.com/marketing-solutions/lead-generation" target="_blank" class="btn-visit">LinkedIn Marketing →</a>
+    </div>
+  </div>
+
+  <!-- 8. CollegeSearch.in / MBAData.in -->
+  <div class="lead-card" data-category="database">
+    <div class="card-top">
+      <div class="card-logo">🗂️</div>
+      <div class="card-badges">
+        <span class="badge india">India</span>
+        <span class="badge api">Data API</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Student Database Vendors</div>
+      <div class="card-tagline">India-specific vendors selling bulk MBA aspirant contact data (name, phone, email, city, exam).</div>
+      <div class="pricing-box">
+        <div class="price-label">Bulk Data Cost</div>
+        <div class="price-main">₹2 – ₹15 / record</div>
+        <div class="price-sub">CAT registered (fresh): ₹8–15 | Old data: ₹2–5</div>
+        <div class="price-note">⚠️ Verify compliance — use only opted-in data</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">10L+</div><div class="stat-mini-lbl">Records</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">Filter</div><div class="stat-mini-lbl">By Exam</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">Excel</div><div class="stat-mini-lbl">Format</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">Cheapest per-record cost</div>
+        <div class="pro-item">Filter by city, exam, score range</div>
+        <div class="pro-item">Instant delivery via email</div>
+        <div class="con-item">Data quality varies (stale numbers common)</div>
+        <div class="con-item">Must verify PDPA/TRAI compliance</div>
+        <div class="con-item">Low conversion vs. intent-based leads</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://www.sulekha.com/b2b/student-data-providers" target="_blank" class="btn-visit">Find Vendors →</a>
+    </div>
+  </div>
+
+  <!-- 9. IMS India / TIME Institute Partner Program -->
+  <div class="lead-card" data-category="database">
+    <div class="card-top">
+      <div class="card-logo">📚</div>
+      <div class="card-badges">
+        <span class="badge india">India Only</span>
+        <span class="badge premium">B2B</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Coaching Institute Tie-ups</div>
+      <div class="card-tagline">Direct partnership with IMS, TIME, CL, 2IIM — they refer students who've passed the exam threshold.</div>
+      <div class="pricing-box">
+        <div class="price-label">Revenue Share / Referral Fee</div>
+        <div class="price-main">₹5,000 – ₹25,000 / enrol</div>
+        <div class="price-sub">Or: 5–15% of first-year tuition fee</div>
+        <div class="price-note">⭐ Highest conversion rate (30–60%)</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">60%</div><div class="stat-mini-lbl">Conversion</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">High</div><div class="stat-mini-lbl">Intent</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">Warm</div><div class="stat-mini-lbl">Leads</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">Highest quality — students already selected</div>
+        <div class="pro-item">Pre-filtered by percentile/score</div>
+        <div class="pro-item">Long-term partnership relationship</div>
+        <div class="con-item">Requires negotiation and contract setup</div>
+        <div class="con-item">Limited volume per institute</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://www.imsindia.com/corporate" target="_blank" class="btn-visit">IMS Corporate →</a>
+    </div>
+  </div>
+
+  <!-- 10. Leadsquared (CRM + Lead Capture) -->
+  <div class="lead-card" data-category="crm">
+    <div class="card-top">
+      <div class="card-logo">⚡</div>
+      <div class="card-badges">
+        <span class="badge verified">✓ Verified</span>
+        <span class="badge crm">CRM</span>
+        <span class="badge api">API</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">LeadSquared</div>
+      <div class="card-tagline">India's leading education CRM used by 1,500+ institutions. Captures & nurtures MBA leads at scale.</div>
+      <div class="pricing-box">
+        <div class="price-label">Monthly SaaS Pricing</div>
+        <div class="price-main">₹10,000 – ₹80,000 / mo</div>
+        <div class="price-sub">Basic: ₹10K | Growth: ₹40K | Enterprise: Custom</div>
+        <div class="price-note">⭐ Used by Amity, Manipal, Jain University</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">1,500+</div><div class="stat-mini-lbl">Clients</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">WhatsApp</div><div class="stat-mini-lbl">+Email+SMS</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">✅ API</div><div class="stat-mini-lbl">Webhook</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">Full CRM pipeline (call, SMS, WhatsApp, email)</div>
+        <div class="pro-item">Education-specific workflows built-in</div>
+        <div class="pro-item">Integrates with Shiksha, Careers360, Google</div>
+        <div class="con-item">Monthly cost can add up quickly</div>
+        <div class="con-item">Steep learning curve for new teams</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://www.leadsquared.com/education/" target="_blank" class="btn-visit">Visit LeadSquared →</a>
+    </div>
+  </div>
+
+  <!-- 11. YouTube Ads -->
+  <div class="lead-card" data-category="social">
+    <div class="card-top">
+      <div class="card-logo">▶️</div>
+      <div class="card-badges">
+        <span class="badge verified">✓ Verified</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">YouTube Ads (India)</div>
+      <div class="card-tagline">Video ads targeting MBA coaching channel viewers — high intent, lower CPL than Google Search.</div>
+      <div class="pricing-box">
+        <div class="price-label">Cost Per View / Lead</div>
+        <div class="price-main">₹0.25 – ₹2 / view</div>
+        <div class="price-sub">Lead form via YouTube: ₹200–600 CPL</div>
+        <div class="price-note">⭐ Target viewers of 2IIM, Career Launcher channels</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">50Cr+</div><div class="stat-mini-lbl">India Users</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">In-Stream</div><div class="stat-mini-lbl">Ad Format</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">Video</div><div class="stat-mini-lbl">Required</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">Target placement on competitor channels</div>
+        <div class="pro-item">High brand recall vs. text ads</div>
+        <div class="pro-item">Good for awareness + lead gen combined</div>
+        <div class="con-item">Requires video production budget</div>
+        <div class="con-item">Can't skip targeting to specific search queries</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://ads.google.com/intl/en_in/home/campaigns/video-ads/" target="_blank" class="btn-visit">YouTube Ads →</a>
+    </div>
+  </div>
+
+  <!-- 12. Sulekha / JustDial Education -->
+  <div class="lead-card" data-category="portal">
+    <div class="card-top">
+      <div class="card-logo">📞</div>
+      <div class="card-badges">
+        <span class="badge india">India</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Sulekha / JustDial Education</div>
+      <div class="card-tagline">Local lead platforms where students search for MBA coaching centres & colleges by city.</div>
+      <div class="pricing-box">
+        <div class="price-label">Monthly Listing + Lead Cost</div>
+        <div class="price-main">₹5,000 – ₹25,000 / mo</div>
+        <div class="price-sub">Depends on city tier and category</div>
+        <div class="price-note">⭐ Good for Tier-2 cities coaching institutes</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-mini"><div class="stat-mini-val">Tier-2</div><div class="stat-mini-lbl">City Focus</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">Call</div><div class="stat-mini-lbl">Based Leads</div></div>
+        <div class="stat-mini"><div class="stat-mini-val">Low</div><div class="stat-mini-lbl">Tech Barrier</div></div>
+      </div>
+      <div class="pros-cons">
+        <h4>Pros & Cons</h4>
+        <div class="pro-item">Strong in Tier-2 & Tier-3 cities</div>
+        <div class="pro-item">Very low CPL for coaching centres</div>
+        <div class="pro-item">Phone-based leads (pre-qualified intent)</div>
+        <div class="con-item">Not suitable for premium IIM/ISB segment</div>
+        <div class="con-item">Lead quality inconsistent</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://www.sulekha.com/advertise" target="_blank" class="btn-visit">Sulekha Advertise →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ROI COMPARISON TABLE -->
+<div class="section-header">
+  <span>📊</span>
+  <h2>Platform ROI Comparison</h2>
+</div>
+<div class="roi-section">
+  <div class="roi-table-card">
+    <div class="roi-header">
+      <span>💡</span>
+      <h2>Which Platform Should You Choose?</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>CPL Range (INR)</th>
+          <th>Lead Quality</th>
+          <th>Volume</th>
+          <th>Best For</th>
+          <th>India Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Meta Ads</strong></td>
+          <td>₹80 – ₹400</td>
+          <td>🟡 Medium</td>
+          <td>Very High</td>
+          <td>Volume campaigns, all segments</td>
+          <td class="rating">⭐⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>Shiksha.com</strong></td>
+          <td>₹300 – ₹700</td>
+          <td>🟢 High</td>
+          <td>High</td>
+          <td>CAT/XAT Tier-1 aspirants</td>
+          <td class="rating">⭐⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>Google Ads</strong></td>
+          <td>₹300 – ₹800</td>
+          <td>🟢 Very High</td>
+          <td>Medium</td>
+          <td>High-intent search leads</td>
+          <td class="rating">⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>Careers360</strong></td>
+          <td>₹200 – ₹800</td>
+          <td>🟢 High</td>
+          <td>High</td>
+          <td>Exclusive MBA college leads</td>
+          <td class="rating">⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>CollegeDekho</strong></td>
+          <td>₹100 – ₹400</td>
+          <td>🟡 Medium</td>
+          <td>High</td>
+          <td>Budget campaigns, Tier-2 colleges</td>
+          <td class="rating">⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>Coaching Tie-ups</strong></td>
+          <td>₹5,000–25,000</td>
+          <td>🟢 Highest</td>
+          <td>Low</td>
+          <td>Qualified admits — highest ROI</td>
+          <td class="rating">⭐⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>LinkedIn Ads</strong></td>
+          <td>₹800 – ₹3,000</td>
+          <td>🟢 Very High</td>
+          <td>Low</td>
+          <td>Executive MBA, working professionals</td>
+          <td class="rating">⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>Meritto CRM</strong></td>
+          <td>₹2L–12L / yr</td>
+          <td>🟢 High</td>
+          <td>Very High</td>
+          <td>Large institutions needing full CRM</td>
+          <td class="rating">⭐⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>YouTube Ads</strong></td>
+          <td>₹200 – ₹600</td>
+          <td>🟡 Medium</td>
+          <td>Very High</td>
+          <td>Brand awareness + retargeting</td>
+          <td class="rating">⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>Bulk Data</strong></td>
+          <td>₹2 – ₹15/record</td>
+          <td>🔴 Low</td>
+          <td>Very High</td>
+          <td>Cold calling campaigns</td>
+          <td class="rating">⭐⭐</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <p>EduPulse India — Paid Lead Sources Guide &nbsp;|&nbsp; Prices are indicative 2024–25 rates. Contact vendors for exact quotes.</p>
+  <p style="margin-top:6px">⚠️ Always verify PDPA & TRAI DND compliance before purchasing or using any lead database.</p>
+</footer>
+
+<script>
+function filterCards(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.lead-card').forEach(card => {
+    if (cat === 'all' || card.dataset.category === cat) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduPulse India — MBA Aspirant Lead Platform</title>
+  <meta name="description" content="India's smartest MBA lead generation platform. Connect with top B-school aspirants preparing for CAT, XAT, GMAT and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/landing.css" />
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-logo">
+        <span class="logo-icon">🎓</span>
+        <span class="logo-text">EduPulse <span class="logo-india">India</span></span>
+      </div>
+      <div class="nav-badge">
+        <span class="pulse-dot"></span>
+        Live Intelligence
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>🇮🇳 India's #1 MBA Aspirant Platform</span>
+      </div>
+      <h1 class="hero-title">
+        Reach <span class="gradient-text">1.2 Lakh+</span><br/>
+        MBA Aspirants<br/>
+        <span class="hero-subtitle-inline">Before Anyone Else</span>
+      </h1>
+      <p class="hero-desc">
+        Real-time intelligence on students preparing for <strong>CAT, XAT, GMAT, CMAT, SNAP</strong> across India.
+        Data refreshed every <strong>5 minutes</strong> from Reddit, Pagalguy, Google Trends & more.
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num" id="stat-leads">0</span>
+          <span class="stat-label">Leads Captured</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" id="stat-intel">0</span>
+          <span class="stat-label">Data Points</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">5 Min</span>
+          <span class="stat-label">Refresh Rate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Register Below</span>
+      <div class="scroll-arrow">↓</div>
+    </div>
+  </section>
+
+  <!-- FORM SECTION (No Paper Form — like Meritto/NPF) -->
+  <section class="form-section" id="register">
+    <div class="form-container">
+      <div class="form-left">
+        <div class="form-tag">Free Registration</div>
+        <h2 class="form-title">Start Your<br/><span class="gradient-text">MBA Journey</span></h2>
+        <p class="form-desc">Join thousands of aspirants. Get personalized study resources, college shortlists, and mentor connect — all free.</p>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <span class="fi-icon">📊</span>
+            <div>
+              <strong>Live Exam Intelligence</strong>
+              <span>Updated CAT, XAT cutoffs & trends</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="fi-icon">🏫</span>
+            <div>
+              <strong>B-School Shortlisting</strong>
+              <span>IIMs, XLRI, FMS & 200+ colleges</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="fi-icon">📱</span>
+            <div>
+              <strong>WhatsApp Updates</strong>
+              <span>Instant notifications on your phone</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="fi-icon">🤝</span>
+            <div>
+              <strong>Mentor Connect</strong>
+              <span>Talk to IIM alumni for free</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-right">
+        <div class="form-card" id="formCard">
+          <div class="form-card-header">
+            <h3>Quick Register</h3>
+            <p>Takes less than 60 seconds</p>
+          </div>
+
+          <form id="leadForm" action="/submit-lead" method="POST">
+            <div class="field-group">
+              <label for="name">Full Name *</label>
+              <div class="input-wrap">
+                <span class="input-icon">👤</span>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required autocomplete="name" />
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label for="phone">WhatsApp Number *</label>
+              <div class="input-wrap">
+                <span class="input-icon">📱</span>
+                <span class="country-code">+91</span>
+                <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" required maxlength="10" pattern="[6-9][0-9]{9}" autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label for="email">Email Address</label>
+              <div class="input-wrap">
+                <span class="input-icon">✉️</span>
+                <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field-group">
+                <label for="city">City</label>
+                <div class="input-wrap">
+                  <span class="input-icon">🏙️</span>
+                  <select id="city" name="city">
+                    <option value="">Select City</option>
+                    <option>Delhi</option><option>Mumbai</option><option>Bangalore</option>
+                    <option>Hyderabad</option><option>Pune</option><option>Chennai</option>
+                    <option>Kolkata</option><option>Ahmedabad</option><option>Jaipur</option>
+                    <option>Lucknow</option><option>Noida</option><option>Gurgaon</option>
+                    <option>Indore</option><option>Bhopal</option><option>Nagpur</option>
+                    <option>Coimbatore</option><option>Kochi</option><option>Chandigarh</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="target_exam">Target Exam</label>
+                <div class="input-wrap">
+                  <span class="input-icon">📚</span>
+                  <select id="target_exam" name="target_exam">
+                    <option value="">Select Exam</option>
+                    <option value="CAT">CAT</option>
+                    <option value="XAT">XAT</option>
+                    <option value="GMAT">GMAT</option>
+                    <option value="CMAT">CMAT</option>
+                    <option value="SNAP">SNAP</option>
+                    <option value="MAT">MAT</option>
+                    <option value="NMAT">NMAT</option>
+                    <option value="Multiple">Multiple Exams</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label>Target Year</label>
+              <div class="year-buttons" id="yearButtons">
+                <button type="button" class="year-btn active" data-year="2025">2025</button>
+                <button type="button" class="year-btn" data-year="2026">2026</button>
+                <button type="button" class="year-btn" data-year="2027">2027</button>
+              </div>
+              <input type="hidden" id="target_year" name="target_year" value="2025" />
+            </div>
+
+            <div class="consent-row">
+              <input type="checkbox" id="consent" required />
+              <label for="consent">I agree to receive updates on WhatsApp & Email. I understand this is free.</label>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <span class="btn-text">Get Free Access →</span>
+              <span class="btn-loader" hidden>Submitting...</span>
+            </button>
+
+            <p class="form-trust">
+              🔒 100% Free · No Spam · India Only
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOURCES SECTION -->
+  <section class="sources-section">
+    <div class="sources-inner">
+      <h2 class="section-title">Data Sourced From</h2>
+      <div class="sources-grid">
+        <div class="source-card">
+          <span class="src-icon">🔴</span>
+          <span>Reddit India</span>
+          <small>r/CATprep, r/MBA</small>
+        </div>
+        <div class="source-card">
+          <span class="src-icon">💬</span>
+          <span>Pagalguy</span>
+          <small>Forums & Discussions</small>
+        </div>
+        <div class="source-card">
+          <span class="src-icon">🌐</span>
+          <span>Google Trends</span>
+          <small>India Searches</small>
+        </div>
+        <div class="source-card">
+          <span class="src-icon">📰</span>
+          <span>News RSS</span>
+          <small>MBA/CAT News India</small>
+        </div>
+        <div class="source-card">
+          <span class="src-icon">🏛️</span>
+          <span>College Portals</span>
+          <small>IIMs, XLRI, FMS</small>
+        </div>
+        <div class="source-card">
+          <span class="src-icon">❓</span>
+          <span>Quora</span>
+          <small>Q&A Discussions</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCESS TOAST -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✅</span>
+    <span id="toastMsg">Registration successful!</span>
+  </div>
+
+  <script src="/static/landing.js"></script>
+</body>
+</html>
