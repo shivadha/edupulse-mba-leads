@@ -1045,3 +1045,75 @@ def get_source_list() -> list[dict]:
         {"key": "telegram",        "label": "Telegram Channels",  "icon": "✈️", "desc": "2IIM, IMS, PrepLadder, CAT 2026 channels (+Telethon if configured)"},
         {"key": "india_news",      "label": "India News RSS",     "icon": "🗞️", "desc": "HT, TOI, NDTV, The Hindu, Indian Express"},
     ]
+
+
+if __name__ == "__main__":
+    import os
+    import sys
+    # Add parent directory to path so database and other modules resolve
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if base_dir not in sys.path:
+        sys.path.insert(0, base_dir)
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+        datefmt="%H:%M:%S"
+    )
+
+    print("\n" + "=" * 65)
+    print("  EduPulse India -- Multi-Source MBA Aspirant Lead Scraper")
+    print("  Running full scrape across 13 Indian education sources...")
+    print("=" * 65 + "\n")
+
+    start_time = time.time()
+    scraped_items = run_all_scrapers()
+    elapsed = round(time.time() - start_time, 2)
+
+    # Persist to database if database module is available
+    added_to_db = 0
+    try:
+        import database as db
+        db.init_db()
+        added_to_db = db.save_intelligence_batch(scraped_items)
+        db.log_scrape_run(added_to_db, elapsed)
+    except Exception as db_err:
+        logger.warning("Could not persist to DB: %s", db_err)
+
+    # Print summary report
+    print("\n" + "=" * 65)
+    print(f"  SCRAPE CYCLE COMPLETE in {elapsed}s")
+    print(f"  Total items collected: {len(scraped_items)}")
+    print(f"  New items saved to DB: {added_to_db}")
+    print("=" * 65)
+
+    # Breakdown by Source
+    by_src = {}
+    by_intent = {}
+    by_exam = {}
+    for it in scraped_items:
+        s = it.get("source", "unknown")
+        by_src[s] = by_src.get(s, 0) + 1
+        lvl = it.get("intent_level", "unclassified")
+        by_intent[lvl] = by_intent.get(lvl, 0) + 1
+        ex = it.get("exam_hint", "General")
+        by_exam[ex] = by_exam.get(ex, 0) + 1
+
+    print("\nBreakdown by Source:")
+    for src, count in sorted(by_src.items(), key=lambda x: x[1], reverse=True):
+        print(f"  • {src.ljust(18)}: {count}")
+
+    print("\nBreakdown by Intent Level:")
+    for lvl, count in sorted(by_intent.items(), key=lambda x: x[1], reverse=True):
+        print(f"  • {lvl.ljust(18)}: {count}")
+
+    print("\nBreakdown by Target Exam:")
+    for ex, count in sorted(by_exam.items(), key=lambda x: x[1], reverse=True):
+        print(f"  • {str(ex).ljust(18)}: {count}")
+
+    print("\nSample high-intent leads:")
+    high_intent = [i for i in scraped_items if i.get("intent_level") == "high"][:3]
+    for h in high_intent:
+        print(f"  [{h.get('source')}] {h.get('title')[:70]}... (Score: {h.get('intent_score', 0)})")
+    print("=" * 65 + "\n")
+
