@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduPulse — Free CAT College Predictor</title>
+  <meta name="description" content="Enter your CAT percentile and see which MBA colleges you can target — reach, target and safe. Free, no signup." />
+  <link rel="stylesheet" href="/static/predictor.css" />
+</head>
+<body>
+
+  <header class="p-header">
+    <div class="p-wrap p-nav">
+      <a class="p-brand" href="/">
+        <span class="p-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 10v6"/></svg>
+        </span>
+        <span class="p-name">Edu<em>Pulse</em></span>
+      </a>
+      <span class="p-tag">Free CAT College Predictor</span>
+    </div>
+  </header>
+
+  <main class="p-wrap">
+
+    <section class="p-hero">
+      <div class="p-kicker"><span class="pulse-dot"></span>70 B-schools · cutoffs from real admissions data</div>
+      <h1>Where can you get in with your <span class="grad">CAT percentile</span>?</h1>
+      <p class="p-sub">Move the slider, pick your category, and get an instant shortlist of colleges —
+      split into <strong>reach</strong>, <strong>target</strong> and <strong>safe</strong>. Free, takes 20 seconds.</p>
+    </section>
+
+    <section class="p-card" id="predictorCard">
+      <div class="p-grid">
+        <div class="p-field">
+          <label for="inName">Your name</label>
+          <input id="inName" type="text" placeholder="e.g. Ananya Sharma" autocomplete="name" />
+        </div>
+        <div class="p-field">
+          <label for="inPhone">Mobile number</label>
+          <input id="inPhone" type="tel" inputmode="numeric" maxlength="13" placeholder="10-digit mobile" autocomplete="tel" />
+        </div>
+        <div class="p-field">
+          <label for="inCategory">Category</label>
+          <select id="inCategory">
+            <option value="General" selected>General</option>
+            <option value="EWS">EWS</option>
+            <option value="OBC">OBC (Non-creamy)</option>
+            <option value="SC">SC</option>
+            <option value="ST">ST</option>
+          </select>
+        </div>
+        <div class="p-field">
+          <label for="inGender">Gender</label>
+          <select id="inGender">
+            <option value="male" selected>Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="p-slider-wrap">
+        <div class="p-slider-head">
+          <label for="inPct">Expected CAT percentile</label>
+          <output id="pctOut" for="inPct">92</output>
+        </div>
+        <input id="inPct" type="range" min="60" max="100" step="0.5" value="92" />
+        <div class="p-scale"><span>60</span><span>70</span><span>80</span><span>90</span><span>100</span></div>
+      </div>
+
+      <p class="p-error" id="predError" role="alert"></p>
+      <button type="button" class="p-submit" id="predictBtn">
+        Check my college chances
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+      </button>
+      <p class="p-note">Cutoffs are indicative, based on recent admission cycles. A counsellor can refine this with your full profile.</p>
+    </section>
+
+    <section id="results" class="p-results" hidden>
+      <div class="p-res-head">
+        <h2>Your shortlist</h2>
+        <div class="p-counts" id="counts"></div>
+      </div>
+      <div class="p-filters" id="filters">
+        <button type="button" data-f="all" class="on">All</button>
+        <button type="button" data-f="safe">Safe</button>
+        <button type="button" data-f="target">Target</button>
+        <button type="button" data-f="reach">Reach</button>
+      </div>
+      <div class="p-cards" id="cards"></div>
+
+      <div class="p-whatsapp" id="waCta">
+        <div>
+          <h3>Want this full list on WhatsApp — with fees vs. placements?</h3>
+          <p>Drop your details once and a counsellor sends your personalised shortlist, free. No spam, ever.</p>
+        </div>
+        <button type="button" class="p-wa-btn" id="waBtn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.6.8-.4 1.2.6 1.1 1.4 1.8 2.5 2.4.3.2.5.1.7-.1l.8-.9c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.1 1.5z"/></svg>
+          Get my full list on WhatsApp
+        </button>
+        <p class="p-error" id="leadError" role="alert"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="p-footer">
+    <div class="p-wrap">© 2026 EduPulse. Predictor data: CatScore MBA dataset · cutoffs indicative, not a guarantee of admission.</div>
+  </footer>
+
+  <div class="p-toast" id="toast" role="status"></div>
+
+  <script src="/static/predictor.js"></script>
+</body>
+</html>

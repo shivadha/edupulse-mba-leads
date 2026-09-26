@@ -1,0 +1,1122 @@
+[
+  {
+    "name": "IIM Ahmedabad",
+    "city": "Ahmedabad",
+    "cutoff_percentile": 99.0,
+    "cutoffs": {
+      "General": 99.0,
+      "EWS": 97.0,
+      "OBC": 95.0,
+      "SC": 85.0,
+      "ST": 75.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 25.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Bangalore",
+    "city": "Bangalore",
+    "cutoff_percentile": 99.0,
+    "cutoffs": {
+      "General": 99.0,
+      "EWS": 97.0,
+      "OBC": 96.0,
+      "SC": 85.0,
+      "ST": 75.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 24.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Calcutta",
+    "city": "Kolkata",
+    "cutoff_percentile": 99.0,
+    "cutoffs": {
+      "General": 99.0,
+      "EWS": 97.0,
+      "OBC": 96.0,
+      "SC": 85.0,
+      "ST": 75.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 25.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Lucknow",
+    "city": "Lucknow",
+    "cutoff_percentile": 98.0,
+    "cutoffs": {
+      "General": 98.0,
+      "EWS": 95.0,
+      "OBC": 94.0,
+      "SC": 80.0,
+      "ST": 75.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 20.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Kozhikode",
+    "city": "Kozhikode",
+    "cutoff_percentile": 97.0,
+    "cutoffs": {
+      "General": 97.0,
+      "EWS": 92.0,
+      "OBC": 90.0,
+      "SC": 80.0,
+      "ST": 70.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 22.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Indore",
+    "city": "Indore",
+    "cutoff_percentile": 97.0,
+    "cutoffs": {
+      "General": 97.0,
+      "EWS": 92.0,
+      "OBC": 93.0,
+      "SC": 80.0,
+      "ST": 70.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 21.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Shillong",
+    "city": "Shillong",
+    "cutoff_percentile": 94.0,
+    "cutoffs": {
+      "General": 94.0,
+      "EWS": 90.0,
+      "OBC": 88.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 18.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Ranchi",
+    "city": "Rohtak",
+    "cutoff_percentile": 90.0,
+    "cutoffs": {
+      "General": 90.0,
+      "EWS": 87.0,
+      "OBC": 85.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 17.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Raipur",
+    "city": "Ranchi",
+    "cutoff_percentile": 92.0,
+    "cutoffs": {
+      "General": 92.0,
+      "EWS": 88.0,
+      "OBC": 85.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 18.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Trichy",
+    "city": "Raipur",
+    "cutoff_percentile": 92.0,
+    "cutoffs": {
+      "General": 92.0,
+      "EWS": 88.0,
+      "OBC": 85.0,
+      "SC": 80.0,
+      "ST": 70.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 18.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Udaipur",
+    "city": "Tiruchirappalli",
+    "cutoff_percentile": 93.0,
+    "cutoffs": {
+      "General": 93.0,
+      "EWS": 89.0,
+      "OBC": 87.0,
+      "SC": 78.0,
+      "ST": 68.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 21.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Kashipur",
+    "city": "Udaipur",
+    "cutoff_percentile": 92.0,
+    "cutoffs": {
+      "General": 92.0,
+      "EWS": 88.0,
+      "OBC": 85.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 17.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Nagpur",
+    "city": "Kashipur",
+    "cutoff_percentile": 90.0,
+    "cutoffs": {
+      "General": 90.0,
+      "EWS": 85.0,
+      "OBC": 83.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 16.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Amritsar",
+    "city": "Visakhapatnam",
+    "cutoff_percentile": 88.0,
+    "cutoffs": {
+      "General": 88.0,
+      "EWS": 84.0,
+      "OBC": 82.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 17.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Bodh Gaya",
+    "city": "Nagpur",
+    "cutoff_percentile": 88.0,
+    "cutoffs": {
+      "General": 88.0,
+      "EWS": 84.0,
+      "OBC": 82.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 16.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Jammu",
+    "city": "Delhi",
+    "cutoff_percentile": 87.0,
+    "cutoffs": {
+      "General": 87.0,
+      "EWS": 83.0,
+      "OBC": 80.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 16.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Sambalpur",
+    "city": "Mumbai",
+    "cutoff_percentile": 88.0,
+    "cutoffs": {
+      "General": 88.0,
+      "EWS": 84.0,
+      "OBC": 82.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 15.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Sirmaur",
+    "city": "Gurgaon",
+    "cutoff_percentile": 86.0,
+    "cutoffs": {
+      "General": 86.0,
+      "EWS": 82.0,
+      "OBC": 80.0,
+      "SC": 68.0,
+      "ST": 58.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 14.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "IIM Mumbai",
+    "city": "Chennai",
+    "cutoff_percentile": 97.0,
+    "cutoffs": {
+      "General": 97.0,
+      "EWS": 94.0,
+      "OBC": 92.0,
+      "SC": 85.0,
+      "ST": 75.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 22.0,
+    "fees_lakhs": 21.0,
+    "placement_pct": 100.0
+  },
+  {
+    "name": "DMS IIT Delhi",
+    "city": "Bhubaneswar",
+    "cutoff_percentile": 95.0,
+    "cutoffs": {
+      "General": 95.0,
+      "EWS": 92.0,
+      "OBC": 90.0,
+      "SC": 80.0,
+      "ST": 70.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 18.0,
+    "fees_lakhs": 12.0,
+    "placement_pct": 95.0
+  },
+  {
+    "name": "SJMSOM IIT Bombay",
+    "city": "Manipal",
+    "cutoff_percentile": 96.0,
+    "cutoffs": {
+      "General": 96.0,
+      "EWS": 93.0,
+      "OBC": 92.0,
+      "SC": 82.0,
+      "ST": 72.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 18.0,
+    "fees_lakhs": 14.0,
+    "placement_pct": 95.0
+  },
+  {
+    "name": "VGSoM IIT Kharagpur",
+    "city": "Goa",
+    "cutoff_percentile": 90.0,
+    "cutoffs": {
+      "General": 90.0,
+      "EWS": 87.0,
+      "OBC": 85.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 18.0,
+    "fees_lakhs": 11.0,
+    "placement_pct": 95.0
+  },
+  {
+    "name": "DoMS IIT Madras",
+    "city": "Anand",
+    "cutoff_percentile": 92.0,
+    "cutoffs": {
+      "General": 92.0,
+      "EWS": 88.0,
+      "OBC": 85.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 18.0,
+    "fees_lakhs": 10.0,
+    "placement_pct": 95.0
+  },
+  {
+    "name": "IME IIT Kanpur",
+    "city": "Greater Noida",
+    "cutoff_percentile": 90.0,
+    "cutoffs": {
+      "General": 90.0,
+      "EWS": 87.0,
+      "OBC": 85.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 18.0,
+    "fees_lakhs": 9.0,
+    "placement_pct": 95.0
+  },
+  {
+    "name": "DoMS IIT Roorkee",
+    "city": "Pune",
+    "cutoff_percentile": 88.0,
+    "cutoffs": {
+      "General": 88.0,
+      "EWS": 85.0,
+      "OBC": 82.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 18.0,
+    "fees_lakhs": 8.0,
+    "placement_pct": 95.0
+  },
+  {
+    "name": "IIT Dhanbad SOM",
+    "city": "Noida",
+    "cutoff_percentile": 80.0,
+    "cutoffs": {
+      "General": 80.0,
+      "EWS": 78.0,
+      "OBC": 75.0,
+      "SC": 65.0,
+      "ST": 55.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 18.0,
+    "fees_lakhs": 8.0,
+    "placement_pct": 95.0
+  },
+  {
+    "name": "IIT Jodhpur SOM",
+    "city": "Kanpur",
+    "cutoff_percentile": 85.0,
+    "cutoffs": {
+      "General": 85.0,
+      "EWS": 82.0,
+      "OBC": 80.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 18.0,
+    "fees_lakhs": 9.0,
+    "placement_pct": 95.0
+  },
+  {
+    "name": "IIT Bhubaneswar SOM",
+    "city": "Dhanbad",
+    "cutoff_percentile": 85.0,
+    "cutoffs": {
+      "General": 85.0,
+      "EWS": 82.0,
+      "OBC": 80.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 18.0,
+    "fees_lakhs": 9.0,
+    "placement_pct": 95.0
+  },
+  {
+    "name": "FMS Delhi",
+    "city": "Jodhpur",
+    "cutoff_percentile": 99.0,
+    "cutoffs": {
+      "General": 99.0,
+      "EWS": 98.0,
+      "OBC": 97.0,
+      "SC": 90.0,
+      "ST": 85.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 2.0,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "DBE Delhi",
+    "city": "Jammu",
+    "cutoff_percentile": 94.0,
+    "cutoffs": {
+      "General": 94.0,
+      "EWS": 92.0,
+      "OBC": 90.0,
+      "SC": 80.0,
+      "ST": 70.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 1.5,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "DSE MBA IB",
+    "city": "Bhilai",
+    "cutoff_percentile": 92.0,
+    "cutoffs": {
+      "General": 92.0,
+      "EWS": 90.0,
+      "OBC": 88.0,
+      "SC": 78.0,
+      "ST": 68.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 1.2,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "BHU FMS",
+    "city": "Ahmedabad",
+    "cutoff_percentile": 88.0,
+    "cutoffs": {
+      "General": 88.0,
+      "EWS": 86.0,
+      "OBC": 85.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 1",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 1.0,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "UBS Chandigarh",
+    "city": "Bangalore",
+    "cutoff_percentile": 90.0,
+    "cutoffs": {
+      "General": 90.0,
+      "EWS": 88.0,
+      "OBC": 85.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 1.5,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "IIFT Delhi",
+    "city": "Kolkata",
+    "cutoff_percentile": 98.0,
+    "cutoffs": {
+      "General": 98.0,
+      "EWS": 96.0,
+      "OBC": 94.0,
+      "SC": 85.0,
+      "ST": 75.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 21.0,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "IIFT Kolkata",
+    "city": "Lucknow",
+    "cutoff_percentile": 95.0,
+    "cutoffs": {
+      "General": 95.0,
+      "EWS": 93.0,
+      "OBC": 90.0,
+      "SC": 80.0,
+      "ST": 70.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 21.0,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "TISS Mumbai",
+    "city": "Kozhikode",
+    "cutoff_percentile": 92.0,
+    "cutoffs": {
+      "General": 92.0,
+      "EWS": 90.0,
+      "OBC": 88.0,
+      "SC": 78.0,
+      "ST": 68.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 2.0,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "IIFM Bhopal",
+    "city": "Indore",
+    "cutoff_percentile": 80.0,
+    "cutoffs": {
+      "General": 80.0,
+      "EWS": 78.0,
+      "OBC": 75.0,
+      "SC": 65.0,
+      "ST": 55.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 4.0,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "NIT Trichy DoMS",
+    "city": "Shillong",
+    "cutoff_percentile": 85.0,
+    "cutoffs": {
+      "General": 85.0,
+      "EWS": 83.0,
+      "OBC": 80.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 3.5,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "NIT Warangal SOM",
+    "city": "Rohtak",
+    "cutoff_percentile": 78.0,
+    "cutoffs": {
+      "General": 78.0,
+      "EWS": 76.0,
+      "OBC": 75.0,
+      "SC": 65.0,
+      "ST": 55.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 3.0,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "NIT Rourkela SOM",
+    "city": "Ranchi",
+    "cutoff_percentile": 75.0,
+    "cutoffs": {
+      "General": 75.0,
+      "EWS": 73.0,
+      "OBC": 70.0,
+      "SC": 60.0,
+      "ST": 50.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 35.0,
+    "fees_lakhs": 2.5,
+    "placement_pct": 90.0
+  },
+  {
+    "name": "SP Jain Institute of Management and Research",
+    "city": "Raipur",
+    "cutoff_percentile": 95.0,
+    "cutoffs": {
+      "General": 95.0,
+      "EWS": 93.0,
+      "OBC": 90.0,
+      "SC": 80.0,
+      "ST": 70.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 22.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Management Development Institute Gurgaon",
+    "city": "Tiruchirappalli",
+    "cutoff_percentile": 94.0,
+    "cutoffs": {
+      "General": 94.0,
+      "EWS": 92.0,
+      "OBC": 90.0,
+      "SC": 80.0,
+      "ST": 70.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 24.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Institute of Management Technology Ghaziabad",
+    "city": "Udaipur",
+    "cutoff_percentile": 90.0,
+    "cutoffs": {
+      "General": 90.0,
+      "EWS": 88.0,
+      "OBC": 85.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 21.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "International Management Institute New Delhi",
+    "city": "Kashipur",
+    "cutoff_percentile": 88.0,
+    "cutoffs": {
+      "General": 88.0,
+      "EWS": 86.0,
+      "OBC": 84.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 20.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Great Lakes Institute of Management Chennai",
+    "city": "Visakhapatnam",
+    "cutoff_percentile": 85.0,
+    "cutoffs": {
+      "General": 85.0,
+      "EWS": 83.0,
+      "OBC": 80.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 18.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "TAPMI Manipal",
+    "city": "Nagpur",
+    "cutoff_percentile": 85.0,
+    "cutoffs": {
+      "General": 85.0,
+      "EWS": 83.0,
+      "OBC": 80.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 17.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "KJ Somaiya Institute of Management",
+    "city": "Delhi",
+    "cutoff_percentile": 84.0,
+    "cutoffs": {
+      "General": 84.0,
+      "EWS": 82.0,
+      "OBC": 80.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 19.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Xavier Institute of Management Bhubaneswar",
+    "city": "Mumbai",
+    "cutoff_percentile": 90.0,
+    "cutoffs": {
+      "General": 90.0,
+      "EWS": 88.0,
+      "OBC": 85.0,
+      "SC": 75.0,
+      "ST": 65.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 21.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Birla Institute of Management Technology",
+    "city": "Gurgaon",
+    "cutoff_percentile": 80.0,
+    "cutoffs": {
+      "General": 80.0,
+      "EWS": 78.0,
+      "OBC": 75.0,
+      "SC": 65.0,
+      "ST": 55.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 14.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Loyola Institute of Business Administration",
+    "city": "Chennai",
+    "cutoff_percentile": 80.0,
+    "cutoffs": {
+      "General": 80.0,
+      "EWS": 78.0,
+      "OBC": 75.0,
+      "SC": 65.0,
+      "ST": 55.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 16.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Prin LN Welingkar Institute of Management",
+    "city": "Bhubaneswar",
+    "cutoff_percentile": 78.0,
+    "cutoffs": {
+      "General": 78.0,
+      "EWS": 76.0,
+      "OBC": 75.0,
+      "SC": 65.0,
+      "ST": 55.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 15.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "FORE School of Management",
+    "city": "Manipal",
+    "cutoff_percentile": 85.0,
+    "cutoffs": {
+      "General": 85.0,
+      "EWS": 83.0,
+      "OBC": 80.0,
+      "SC": 70.0,
+      "ST": 60.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 18.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Lal Bahadur Shastri Institute of Management",
+    "city": "Goa",
+    "cutoff_percentile": 78.0,
+    "cutoffs": {
+      "General": 78.0,
+      "EWS": 76.0,
+      "OBC": 75.0,
+      "SC": 65.0,
+      "ST": 55.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 13.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Mudra Institute of Communications Ahmedabad",
+    "city": "Anand",
+    "cutoff_percentile": 80.0,
+    "cutoffs": {
+      "General": 80.0,
+      "EWS": 78.0,
+      "OBC": 75.0,
+      "SC": 65.0,
+      "ST": 55.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 21.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "SDM Institute for Management Development",
+    "city": "Greater Noida",
+    "cutoff_percentile": 75.0,
+    "cutoffs": {
+      "General": 75.0,
+      "EWS": 73.0,
+      "OBC": 70.0,
+      "SC": 60.0,
+      "ST": 50.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 12.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Alliance University",
+    "city": "Pune",
+    "cutoff_percentile": 70.0,
+    "cutoffs": {
+      "General": 70.0,
+      "EWS": 68.0,
+      "OBC": 65.0,
+      "SC": 55.0,
+      "ST": 45.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 16.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Amity University Noida",
+    "city": "Noida",
+    "cutoff_percentile": 70.0,
+    "cutoffs": {
+      "General": 70.0,
+      "EWS": 68.0,
+      "OBC": 65.0,
+      "SC": 55.0,
+      "ST": 45.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 14.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "UPES Dehradun",
+    "city": "Kanpur",
+    "cutoff_percentile": 70.0,
+    "cutoffs": {
+      "General": 70.0,
+      "EWS": 68.0,
+      "OBC": 65.0,
+      "SC": 55.0,
+      "ST": 45.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 15.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "IFMR Graduate School of Business",
+    "city": "Dhanbad",
+    "cutoff_percentile": 75.0,
+    "cutoffs": {
+      "General": 75.0,
+      "EWS": 73.0,
+      "OBC": 70.0,
+      "SC": 60.0,
+      "ST": 50.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 16.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "ICFAI Business School Hyderabad",
+    "city": "Jodhpur",
+    "cutoff_percentile": 70.0,
+    "cutoffs": {
+      "General": 70.0,
+      "EWS": 68.0,
+      "OBC": 65.0,
+      "SC": 55.0,
+      "ST": 45.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 17.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "VIT Business School",
+    "city": "Jammu",
+    "cutoff_percentile": 65.0,
+    "cutoffs": {
+      "General": 65.0,
+      "EWS": 63.0,
+      "OBC": 60.0,
+      "SC": 50.0,
+      "ST": 40.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 12.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "KIIT School of Management",
+    "city": "Bhilai",
+    "cutoff_percentile": 70.0,
+    "cutoffs": {
+      "General": 70.0,
+      "EWS": 68.0,
+      "OBC": 65.0,
+      "SC": 55.0,
+      "ST": 45.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 13.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Jaipuria Institute of Management",
+    "city": "Ahmedabad",
+    "cutoff_percentile": 75.0,
+    "cutoffs": {
+      "General": 75.0,
+      "EWS": 73.0,
+      "OBC": 70.0,
+      "SC": 60.0,
+      "ST": 50.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 13.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "JIMS Rohini",
+    "city": "Bangalore",
+    "cutoff_percentile": 70.0,
+    "cutoffs": {
+      "General": 70.0,
+      "EWS": 68.0,
+      "OBC": 65.0,
+      "SC": 55.0,
+      "ST": 45.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 9.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "XIME Bangalore",
+    "city": "Kolkata",
+    "cutoff_percentile": 75.0,
+    "cutoffs": {
+      "General": 75.0,
+      "EWS": 73.0,
+      "OBC": 70.0,
+      "SC": 60.0,
+      "ST": 50.0
+    },
+    "tier": "Tier 2",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 12.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Indus Business Academy",
+    "city": "Lucknow",
+    "cutoff_percentile": 70.0,
+    "cutoffs": {
+      "General": 70.0,
+      "EWS": 68.0,
+      "OBC": 65.0,
+      "SC": 55.0,
+      "ST": 45.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 9.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Rajagiri Business School",
+    "city": "Kozhikode",
+    "cutoff_percentile": 75.0,
+    "cutoffs": {
+      "General": 75.0,
+      "EWS": 73.0,
+      "OBC": 70.0,
+      "SC": 60.0,
+      "ST": 50.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 11.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "SIES School of Business Studies",
+    "city": "Indore",
+    "cutoff_percentile": 70.0,
+    "cutoffs": {
+      "General": 70.0,
+      "EWS": 68.0,
+      "OBC": 65.0,
+      "SC": 55.0,
+      "ST": 45.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 10.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "Amrita School of Business",
+    "city": "Shillong",
+    "cutoff_percentile": 75.0,
+    "cutoffs": {
+      "General": 75.0,
+      "EWS": 73.0,
+      "OBC": 70.0,
+      "SC": 60.0,
+      "ST": 50.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 13.0,
+    "placement_pct": 85.0
+  },
+  {
+    "name": "SOIL Institute of Management",
+    "city": "Rohtak",
+    "cutoff_percentile": 70.0,
+    "cutoffs": {
+      "General": 70.0,
+      "EWS": 68.0,
+      "OBC": 65.0,
+      "SC": 55.0,
+      "ST": 45.0
+    },
+    "tier": "Tier 3",
+    "avg_package_lpa": 10.0,
+    "fees_lakhs": 14.0,
+    "placement_pct": 85.0
+  }
+]

@@ -1,0 +1,228 @@
+/* ============================================================
+   EduPulse — CAT College Predictor
+   Matches the landing/admin design language: dark navy, indigo
+   gradient, card surfaces. Vanilla CSS, no external dependencies.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0a0f1e;
+  --bg-2:      #0d1428;
+  --surface:   rgba(148, 163, 184, 0.055);
+  --surface-2: rgba(148, 163, 184, 0.09);
+  --border:    rgba(148, 163, 184, 0.14);
+  --border-2:  rgba(148, 163, 184, 0.24);
+  --text:      #eef2ff;
+  --text-2:    #c3cbe4;
+  --muted:     #8b95b3;
+  --indigo:    #6c7bff;
+  --indigo-d:  #4f5df5;
+  --cyan:      #22d3ee;
+  --emerald:   #34d399;
+  --amber:     #fbbf24;
+  --rose:      #fb7185;
+  --grad:      linear-gradient(135deg, #6c7bff 0%, #8b5cf6 55%, #22d3ee 115%);
+  --radius:    18px;
+  --shadow:    0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.p-wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+a { color: inherit; }
+
+/* ── Header ── */
+.p-header {
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(10, 15, 30, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+.p-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
+.p-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.p-mark {
+  width: 38px; height: 38px; border-radius: 11px;
+  background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+}
+.p-mark svg { width: 22px; height: 22px; }
+.p-name { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+.p-name em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.p-tag {
+  font-size: 12px; font-weight: 700; color: var(--text-2);
+  border: 1px solid var(--border-2); border-radius: 999px; padding: 6px 14px;
+  background: var(--surface);
+}
+
+/* ── Hero ── */
+.p-hero { padding: 48px 0 28px; text-align: center; }
+.p-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600; color: var(--text-2);
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 7px 16px; background: var(--surface); margin-bottom: 18px;
+}
+.pulse-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--emerald);
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+  70% { box-shadow: 0 0 0 9px rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+.p-hero h1 { font-size: clamp(30px, 5vw, 44px); font-weight: 800; letter-spacing: -0.025em; margin-bottom: 14px; }
+.grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.p-sub { color: var(--text-2); max-width: 640px; margin: 0 auto; font-size: 17px; }
+.p-sub strong { color: var(--text); }
+
+/* ── Form card ── */
+.p-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: var(--shadow);
+}
+.p-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 24px; }
+.p-field label { display: block; font-size: 13px; font-weight: 600; color: var(--text-2); margin-bottom: 7px; }
+.p-field input, .p-field select {
+  width: 100%; background: var(--bg-2); border: 1px solid var(--border-2);
+  border-radius: 12px; color: var(--text); font-size: 16px;
+  padding: 12px 14px; outline: none;
+  font-family: inherit;
+}
+.p-field input:focus, .p-field select:focus { border-color: var(--indigo); }
+.p-field select { appearance: none; cursor: pointer; }
+
+.p-slider-wrap { margin: 4px 0 8px; }
+.p-slider-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.p-slider-head label { font-size: 14px; font-weight: 600; color: var(--text-2); }
+.p-slider-head output {
+  font-size: 30px; font-weight: 800; color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 10px; border-radius: 999px;
+  background: linear-gradient(90deg, var(--indigo) var(--fill, 82%), var(--surface-2) var(--fill, 82%));
+  outline: none; cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #fff; border: 6px solid var(--indigo-d);
+  box-shadow: 0 4px 14px rgba(108, 123, 255, 0.5);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #fff; border: 6px solid var(--indigo-d);
+}
+.p-scale { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+.p-error { color: var(--rose); font-size: 14px; font-weight: 600; min-height: 22px; margin: 8px 0; }
+.p-submit {
+  width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--grad); color: #fff; border: none; cursor: pointer;
+  font-size: 17px; font-weight: 700; font-family: inherit;
+  padding: 15px 24px; border-radius: 14px; margin-top: 8px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.p-submit:hover:not(:disabled) { transform: translateY(-2px); }
+.p-submit:disabled { opacity: 0.6; cursor: wait; }
+.p-submit svg { width: 20px; height: 20px; }
+.p-note { text-align: center; font-size: 12.5px; color: var(--muted); margin-top: 14px; }
+
+/* ── Results ── */
+.p-results { padding: 34px 0 8px; }
+.p-res-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.p-res-head h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+.p-counts { display: flex; gap: 8px; font-size: 12.5px; font-weight: 700; }
+.p-counts span { border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; background: var(--surface); }
+.p-counts .c-safe { color: var(--emerald); }
+.p-counts .c-target { color: var(--cyan); }
+.p-counts .c-reach { color: var(--amber); }
+
+.p-filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.p-filters button {
+  background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+  font-family: inherit; font-size: 13.5px; font-weight: 600;
+  padding: 8px 18px; border-radius: 999px; cursor: pointer;
+}
+.p-filters button.on { background: var(--indigo-d); border-color: var(--indigo-d); color: #fff; }
+
+.p-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; }
+.p-college {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 18px;
+  display: flex; flex-direction: column; gap: 8px;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.p-college:hover { transform: translateY(-3px); border-color: var(--border-2); }
+.p-college-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.p-college h3 { font-size: 16px; font-weight: 700; line-height: 1.35; }
+.p-college .city { font-size: 13px; color: var(--muted); }
+.badge {
+  flex-shrink: 0; font-size: 11px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.06em; padding: 5px 10px; border-radius: 999px;
+}
+.badge.safe { background: rgba(52, 211, 153, 0.14); color: var(--emerald); border: 1px solid rgba(52, 211, 153, 0.4); }
+.badge.target { background: rgba(34, 211, 238, 0.12); color: var(--cyan); border: 1px solid rgba(34, 211, 238, 0.4); }
+.badge.reach { background: rgba(251, 191, 36, 0.12); color: var(--amber); border: 1px solid rgba(251, 191, 36, 0.4); }
+.p-meta { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--text-2); margin-top: 2px; }
+.p-meta b { color: var(--text); font-variant-numeric: tabular-nums; }
+.p-tier { font-size: 11.5px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ── WhatsApp CTA ── */
+.p-whatsapp {
+  margin: 28px 0 10px; padding: 26px;
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.1), rgba(34, 211, 238, 0.08));
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  border-radius: var(--radius);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.p-whatsapp h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.015em; }
+.p-whatsapp p { color: var(--text-2); font-size: 14.5px; }
+.p-wa-btn {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 10px;
+  background: #22c55e; color: #052e16; border: none; cursor: pointer;
+  font-family: inherit; font-size: 16px; font-weight: 800;
+  padding: 13px 22px; border-radius: 12px;
+  transition: transform 0.15s ease;
+}
+.p-wa-btn:hover:not(:disabled) { transform: translateY(-2px); }
+.p-wa-btn:disabled { opacity: 0.6; cursor: wait; }
+.p-wa-btn svg { width: 22px; height: 22px; }
+.p-error#leadError { margin: 0; }
+
+/* ── Footer & toast ── */
+.p-footer { padding: 40px 0 60px; font-size: 12.5px; color: var(--muted); text-align: center; }
+.p-toast {
+  position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px);
+  background: var(--indigo-d); color: #fff; font-weight: 600; font-size: 14.5px;
+  padding: 13px 22px; border-radius: 12px; box-shadow: var(--shadow);
+  opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease;
+  max-width: calc(100vw - 48px); text-align: center; z-index: 100;
+}
+.p-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .p-grid { grid-template-columns: 1fr; }
+  .p-card { padding: 22px 18px; }
+  .p-whatsapp { padding: 22px 18px; }
+  .p-wa-btn { align-self: stretch; justify-content: center; }
+  .p-hero { padding: 36px 0 22px; }
+}
